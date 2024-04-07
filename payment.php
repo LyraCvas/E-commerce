@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="resources/css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Stripe empieza -->
+    <link rel="stylesheet" href="./resources/css/stripe.css"/>    
+    <script src="https://js.stripe.com/v3/"></script>    
+    <!-- Stripe termina -->
     <title>Rhinotech</title>
 </head>
 
@@ -96,6 +100,23 @@
             <div class="row">
                 <div class="col-6">
                     <h2>Metodos de pago</h4>
+                        <!-- BOTONES PAYPAL -->
+                        <div id="paypal-button-container"></div>
+
+                        <!-- Display a payment form STRIPE -->
+                        <h2>Stripe</h4>
+                        <form id="payment-form" method="post" action="/clases/capture_stripe.php">
+                            
+                            <div id="payment-element">
+                                <!--Stripe.js injects the Payment Element-->
+                            </div>
+                            
+                            <button id="submit">
+                                <div class="spinner hidden" id="spinner"></div>
+                                <span id="button-text">Pay now</span>
+                            </button>
+                            <div id="payment-message" class="hidden"></div>
+                        </form>
                 </div>
                 <div class="col-6">
                     <div class="table-responsive">
@@ -140,14 +161,16 @@
                                             <td><?php echo $name; ?></td>
                                             <td><?php echo $quantity; ?></td>
                                             <td>
-                                                <div id="subtotal_<?php echo $_id; ?>" name="subtotal[]"><?php echo MONEDA . number_format($sub_total, 2, '.', ','); ?></div>
+                                                <div id="subtotal_<?php echo $_id; ?>" name="subtotal[]"><?php echo MONEDA . number_format($sub_total, 2, ',', '.'); ?></div>
                                             </td>
                                         </tr>
                                     <?php } ?>
 
                                     <tr>
                                         <td colspan="4">
-                                            <p class="h3 text-end" id="total"><?php echo MONEDA . number_format($total, 2, '.', ','); ?></p>
+                                            <p class="h3 text-end" id="total"><?php echo MONEDA . number_format($total, 2, ',', '.'); ?></p>
+                                            <!-- Para Stripe -->
+                                            <input type="hidden" name="total" value="<?php echo $total * 100;?>">
                                         </td>
                                     </tr>
                             </tbody>
@@ -164,72 +187,59 @@
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
+    <script src="https://www.paypal.com/sdk/js?client-id=<?php echo CLIENT_ID; ?>&currency=<?php echo CURRENCY; ?>"></script>
 
-<script>
-    let deleteModal = document.getElementById('deleteModal')
-    deleteModal.addEventListener('show.bs.modal', function(event) {
-        let button = event.relatedTarget
-        let id = button.getAttribute('data-bs-id')
-        let buttonEliminar = deleteModal.querySelector('.modal-footer #btn-delete')
-        buttonEliminar.value = id
-    })
+    <script src="./js/stripe2.js" defer></script>
+    <!-- == Botontes de PAYPAL == inicio -->
+    <script>
+        paypal.Buttons({
+            style: {
+                color: 'blue',
+                shape: 'rect',
+                label: 'pay'
+            },
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        //el monto total esta redondeado, porque no me agarra los decimales
+                        amount: {
+                            value: <?php echo number_format($total, 2, '.', '') ?>
+                        }
+                    }]
+                })
+            },
+            onApprove: function(data, actions) {
+                let URL = 'clases/capture.php'
+                actions.order.capture().then(function(details) {
+                    console.log(details);
 
+                    return fetch(URL, {
+                        method: 'post',
+                        headers: {
+                            'content-type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            details: details
+                        })
+                    }).then(function(response){//para finalizar el pago
+                        window.location.href="payment_complete.php?key=" + details['id'];
+                    })
 
-    function updateQuantity(quantity, id) {
-        let url = 'clases/update_cart.php'
-        let formData = new FormData()
-        formData.append('action', 'agregar')
-        formData.append('id_products', id)
-        formData.append('cantidad', quantity)
+                });
+            },
 
-        fetch(url, {
-                method: 'POST',
-                body: formData,
-                mode: 'cors'
-            }).then(response => response.json())
-            .then(data => {
-                if (data.ok) {
-                    let divsubtotal = document.getElementById('subtotal_' + id)
-                    divsubtotal.innerHTML = data.sub
+            onCancel: function(data) {
+                alert("pago cancelado");
+                console.log(data);
+            }
+        }).render('#paypal-button-container')
 
-                    let total = 0.00
-                    let list = document.getElementsByName('subtotal[]')
+    </script>
+    <!-- == Botontes de PAYPAL == final -->
 
-                    for (let i = 0; i < list.length; i++) {
-                        total += parseFloat(list[i].innerHTML.replace(/[$,]/g, ''))
-                    }
-                    total = new Intl.NumberFormat('en-US', {
-                        minimumFractionDigits: 2
-                    }).format(total)
-                    document.getElementById('total').innerHTML = '<?php echo MONEDA; ?>' + total
-                }
-            })
-    }
+    <!-- == Botontes de Stripe == inicio -->
 
-    function eliminar() {
-        let buttonEliminar = document.getElementById('btn-delete')
-        let id = buttonEliminar.value
-
-        let url = 'clases/update_cart.php'
-        let formData = new FormData()
-        formData.append('action', 'eliminar')
-        formData.append('id_products', id)
-
-        fetch(url, {
-                method: 'POST',
-                body: formData,
-                mode: 'cors'
-            }).then(response => response.json())
-            .then(data => {
-                if (data.ok) {
-                    location.reload()
-                }
-            })
-    }
-</script>
-
-
+    <!-- == Botontes de Stripe == final -->
 </body>
 
 </html>

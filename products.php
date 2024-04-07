@@ -86,7 +86,7 @@
                 <nav class="menu_nav">
                     <ul class="menu_list">
                         <li class="menu_litem">
-                            <a href="./index.php" ><i class="fa-solid fa-house"></i></a>
+                            <a href="./index.php"><i class="fa-solid fa-house"></i></a>
                         </li>
                         <li class="menu_litem">
                             <a href="./products.php" id="selected">Tienda</a>
@@ -153,10 +153,10 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <a href="details.php?id=<?php echo $row['id_products']; ?>&token=<?php echo hash_hmac('sha1', $row['id_products'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
-
+                                        
                                     </div>
 
-                                    <button class="btn btn-outline-primary" type="button" onclick="addProduct(<?php echo $row['id_products']; ?>,'<?php echo hash_hmac('sha1', $row['id_products'], KEY_TOKEN); ?>')">
+                                    <button id="ToastBtn<?php echo $row['id_products']; ?>" class="btn btn-outline-primary" type="button" onclick="addProduct(<?php echo $row['id_products']; ?>,'<?php echo hash_hmac('sha1', $row['id_products'], KEY_TOKEN); ?>')">
                                         Agregar al carrito</button>
 
                                 </div>
@@ -201,10 +201,28 @@
             <?php } ?>
         </div>
     </main>
+    <!-- Toast -->
+    <div aria-live="polite" aria-atomic="true" class="position-relative top-0 start-0 p-3" style="z-index: 111111111111111111111;">
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <!-- Then put toasts within -->
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="toastAddCart">
+                <div class="toast-header">
+                    <strong class="me-auto">Notificacion</strong>
+                    <small class="text-body-secondary">Ahora</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Se ha añadido producto al carrito!
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+
+
+    <!-- footer -->
     <?php include_once "./clases/footer.php" ?>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script>
@@ -227,7 +245,38 @@
                 })
         }
     </script>
+    <script>
+        
+        const toastBTN = document.querySelectorAll('[id^="ToastBtn"]');
+        const toast = document.getElementById('toastAddCart')
+        const toastArray = Array.from(toastBTN);
 
+        toastArray.forEach((toastShow) => {
+        const toastBootstrap = new bootstrap.Toast(toast);
+        toastShow.addEventListener('click', () => {
+            toastBootstrap.show();
+        });
+        });
+
+
+
+
+        
+        // const toastBTN = document.querySelectorAll('[id^="ToastBtn"]')
+        // const toastBTNArray = Array.from(toastBTN)
+        // 
+
+        
+        // toastBTNArray.forEach((btn) => {
+        //     const toastBootstrap = new bootstrap.Toast(btn)
+        //     btn.addEventListener('click', () => {
+        //         toastBootstrap.show()
+        //     })
+
+        // })
+
+        
+    </script>
 </body>
 
 </html>
