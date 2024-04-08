@@ -25,9 +25,21 @@
     if (empty($name) == false) {
         $where = "product_name like '%" . $name . "%' OR product_brand like '%" . $name . "%'";
     } //Buscador hasta aqui
-
+    
+    // Categoría
+    $catg = "";
+    $catego = $_REQUEST['ctg'] ?? '';// Obtiene el valor de la categoría
+    if (!empty($catego)) {
+        // Escapa el valor de $catego antes de usarlo en la consulta
+        $escapedCatego = $con->quote($catego);
+        $catg = "AND category = $escapedCatego";
+    } else {
+        $catg = "";
+    }
+    //aqui termina categoria
+        
     //Paginador
-    $queryCount = "SELECT COUNT(*) AS count FROM products WHERE $where ;";
+    $queryCount = "SELECT COUNT(*) AS count FROM products WHERE $where $catg ;";
     $resCount = $con->prepare($queryCount);
     $resCount->execute();
     $rowCount = $resCount->fetch(PDO::FETCH_ASSOC);
@@ -48,8 +60,8 @@
 
     $limit = "limit $limitStart,$itmspPage";
     //Paginador hasta aqui
-
-    $sql = $con->prepare("SELECT id_products, product_name, product_brand, year, price, discount, category FROM products WHERE $where AND activo=1 $limit");
+    
+    $sql = $con->prepare("SELECT id_products, product_name, product_brand, year, price, discount FROM products WHERE $where $catg AND activo=1 $limit");
     $sql->execute();
 
     //print_r($sql);
@@ -91,11 +103,11 @@
                         <li class="menu_litem">
                             <a href="./products.php" id="selected">Tienda</a>
                             <ul class="menu_list">
-                                <li class="menu_litem"><a href="./products.php?ctg=laptops">Laptos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=desktop">Desktop</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=impresoras">Impresoras</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=audifonos">Audifonos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=teclados">Teclados</a></li>
+                                <li class="menu_litem"><a href="./products.php?ctg=4">Laptos</a></li>
+                                <li class="menu_litem"><a href="./products.php?ctg=8">Desktop</a></li>
+                                <li class="menu_litem"><a href="./products.php?ctg=7">Impresoras</a></li>
+                                <li class="menu_litem"><a href="./products.php?ctg=2">Audifonos</a></li>
+                                <li class="menu_litem"><a href="./products.php?ctg=3">Teclados</a></li>
                             </ul>
                         </li>
                         <li class="menu_litem"><a href="#">Nosotros</a></li>
@@ -174,7 +186,7 @@
                         if ($selectPage != 1) {
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="products.php?page=<?php echo ($selectPage - 1); ?>" aria-label="Previous">
+                                <a class="page-link" href="products.php?page=<?php echo ($selectPage - 1); ?>&ctg=<?php echo $catg ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -184,14 +196,14 @@
                         for ($i = 1; $i <= $totalPages; $i++) {
                         ?>
                             <li class="page-item <?php echo ($selectPage == $i) ? "active" : " "; ?>" aria-current="page">
-                                <a class="page-link" href="products.php?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                <a class="page-link" href="products.php?page=<?php echo $i; ?>&ctg=<?php echo $catg ?>"><?php echo $i; ?></a>
                             </li>
                         <?php } ?>
                         <?php
                         if ($selectPage != $totalPages) {
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="products.php?page=<?php echo ($selectPage + 1); ?>" aria-label="Next">
+                                <a class="page-link" href="products.php?page=<?php echo ($selectPage + 1);?>&ctg=<?php echo $catg ?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
