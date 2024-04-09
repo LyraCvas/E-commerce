@@ -12,7 +12,7 @@ $errors = [];
 if(!empty($_POST)){
 
     $nombres = trim($_POST['nombres']);
-    $apellidos = trim($_POST['apellidos']);
+    $direccion = trim($_POST['direccion']);
     $email = trim($_POST['email']);
     $telefono = trim($_POST['telefono']);
     $dni = trim($_POST['dni']);
@@ -20,7 +20,7 @@ if(!empty($_POST)){
     $password = trim($_POST['password']);
     $repassword = trim($_POST['repassword']);
 
-    if(esNulo([$nombres,$apellidos,$email,$telefono,$dni,$usuario,$password, $repassword])){
+    if(esNulo([$nombres,$direccion,$email,$telefono,$dni,$usuario,$password, $repassword])){
         $errors[] = "Debe llenar todos los campos"; 
     }
 
@@ -42,7 +42,7 @@ if(!empty($_POST)){
 
     if(count ($errors) == 0 ){
 
-        $id = registraCliente([$nombres, $apellidos, $email, $telefono, $dni], $con);
+        $id = registraCliente([$nombres, $direccion, $email, $telefono, $dni], $con);
 
         if($id > 0){
 
@@ -142,15 +142,15 @@ if(!empty($_POST)){
             
         
                 <div class="col-md-6">
-                    <label for="nombres"><span class="text-danger">*</span> nombres</label>
+                    <label for="nombres"><span class="text-danger">*</span> Nombre Completo</label>
                     <input type="text" name="nombres" id="nombres" class="form-control" requirede >
                 
                 </div>
 
                 <div class="col-md-6">
 
-                    <label for="apellidos"><span class="text-danger">*</span>Apellidos</label>
-                    <input type="text" name="apellidos" id="apellidos" class="form-control" requirede >
+                    <label for="direccion"><span class="text-danger">*</span>Dirección</label>
+                    <input type="text" name="direccion" id="direccion" class="form-control" requirede >
 
                 </div>
 
