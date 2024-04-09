@@ -992,7 +992,7 @@ button:focus:not(:focus-visible) {
   display: grid;
   place-content: center;
   margin: 0 auto;
-  
+  padding: 3%;  
 }
 
 .contenedor_img-mini {
