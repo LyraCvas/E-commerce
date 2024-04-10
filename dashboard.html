@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rhinotech</title>
+    <link rel="stylesheet" href="./recursos/css/dashboarh.css">
+    <link rel="shortcut icon" href="./recursos/logos/Rhino Tech ISOTIPO 3-02.webp" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"rel="stylesheet"/>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/9a29282719.js" crossorigin="anonymous"></script>
+    
+
+  </head>
+  <body>
+
+    <div class="page-wrapper">
+	
+      <!--   *** Top Bar Starts ***   -->
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <div class="hamburger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="logo">
+           <a href="./index.html"> <img src="./recursos/logos/Rhino Tech -1.webp"></a>
+          </div>
+        </div>
+      
+        <div class="search-box">
+          <input type="text" class="input-box" placeholder="Buscar...">
+          <span class="search-btn">
+            <i class="fa-solid fa-search"></i>
+          </span>
+        </div>
+      
+        <div class="top-bar-right">
+          <div class="mode-switch">
+            <i class="fa-solid fa-moon"></i>
+          </div>
+          <div class="notifications">
+            <i class="fa-solid fa-bell"></i>
+          </div>
+          <div class="profile">
+            <img src="./recursos/logos/Rhino Tech ISOTIPO 3-02.webp">
+          </div>
+        </div>
+      </div>
+      <!--   *** Top Bar Ends ***   -->
+      
+      <!--   === Side Bar Starts ===   -->
+      <aside class="side-bar">
+        <!--   === Nav Bar Links Starts ===   -->
+        <span class="menu-label">MENU</span>
+        <ul class="navbar-links navbar-links-1">
+          <li class="active">
+            <a href="./index.html">
+              <span class="nav-icon">
+                <i class="fa-solid fa-house"></i>
+              </span>
+              <span class="nav-text">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-tasks"></i>
+              </span>
+              <span class="nav-text">Tareas</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-user"></i>
+              </span>
+              <span class="nav-text">Contactos</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-bell"></i>
+              </span>
+              <span class="nav-text">Notificaciones</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-chart-line"></i>
+              </span>
+              <span class="nav-text">Analítica</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-comment"></i>
+              </span>
+              <span class="nav-text">Mensajes</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-bookmark"></i>
+              </span>
+              <span class="nav-text">Collectiones</span>
+            </a>
+          </li>
+        </ul>
+        <span class="line"></span>
+        <span class="menu-label">PREFERENCIAS</span>
+        <ul class="navbar-links navbar-links-2">
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-file"></i>
+              </span>
+              <span class="nav-text">Portfolio</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-pen"></i>
+              </span>
+              <span class="nav-text">Registro</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-users"></i>
+              </span>
+              <span class="nav-text">Clientes</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="nav-icon">
+                <i class="fa-solid fa-question"></i>
+              </span>
+              <span class="nav-text">Centro de ayuda</span>
+            </a>
+          </li>
+        </ul>
+        <!--   === Nav Bar Links Ends ===   -->
+        <!--   === Side Bar Footer Starts ===   -->
+        <div class="sidebar-footer">
+          <div class="settings">
+            <span class="gear-icon">
+              <i class="fa-solid fa-gear"></i>
+            </span>
+            <span class="text">Ajustes</span>
+          </div>
+          <div class="logoutBtn">
+            <span class="logout-icon">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </span>
+            <span class="text">Cerrar sesión</span>
+          </div>
+        </div>
+        <!--   === Side Bar Footer Ends ===   -->
+      </aside>
+      <!--   === Side Bar Ends ===   -->
+      
+      <!--   === Contents Section Starts ===   -->
+      <div class="contents">
+        <!--   === Panel Bar Starts ===   -->
+        <div class="panel-bar">
+          <div class="row-1">
+            <h1>Productos</h1>
+          </div>
+          <div class="row-2">
+            <a href="#" class="active">Descripción general</a>
+            <a href="#">Productos</a>
+            <a href="#">Ventas totales</a>
+            <a href="#">Compras</a>
+          </div>
+        </div>
+        <!--   === Panel Bar Ends ===   -->
+        <!--   === Description Starts ===   -->
+        <div class="description">
+          <!--   === Column 1 Starts ===   -->
+          <div class="col-1">
+          <!--   === Boxes Row Starts ===   -->
+          <div class="boxes-row">
+            <div class="balance-box">
+              <div class="subject-row">
+                <div class="text">
+                  <h3>Ingresos totales</h3>
+                  <h1>$70,452<sub>(USD)</sub></h1>
+                </div>
+                <div class="icon">
+                  <i class="fa-solid fa-arrow-up"></i>
+                </div>
+              </div>
+              <div class="progress-row">
+                <div class="subject">Progreso</div>
+                <div class="progress-bar">
+                  <div class="progress-line" value="91%" style="max-width: 91%"></div>
+                </div>
+              </div>
+            </div>
+      
+            <div class="balance-box">
+              <div class="subject-row">
+                <div class="text">
+                  <h3>Gasto total</h3>
+                  <h1>$64,261<sub>(USD)</sub></h1>
+                </div>
+                <div class="icon">
+                  <i class="fa-solid fa-arrow-down"></i>
+                </div>
+              </div>
+              <div class="progress-row">
+                <div class="subject">progreso</div>
+                <div class="progress-bar">
+                  <div class="progress-line" value="73%" style="max-width: 73%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--   === Boxes Row Ends ===   -->
+          <!--   === Analytics Chart Starts ===   -->
+          <div class="chart">
+            <div class="chart-header">
+              <h2>Análisis de ingresos</h2>
+              <input type="month" class="date" value="2023-12">
+            </div>
+            <div class="chart-contents">
+              <section class="chart-grid">
+                <div class="grid-line" value="100%"></div>
+                <div class="grid-line" value="80%"></div>
+                <div class="grid-line" value="60%"></div>
+                <div class="grid-line" value="40%"></div>
+                <div class="grid-line" value="20%"></div>
+                <div class="grid-line" value="0%"></div>
+              </section>
+              <section class="chart-value-wrapper">
+                <div class="chart-value" style="max-height: 62%"></div>
+                <div class="chart-value" style="max-height: 76%"></div>
+                <div class="chart-value" style="max-height: 70%"></div>
+                <div class="chart-value" style="max-height: 82%"></div>
+                <div class="chart-value" style="max-height: 78%"></div>
+                <div class="chart-value" style="max-height: 94%"></div>
+              </section>
+              <section class="chart-labels">
+                <div>Jul</div>
+                <div>Ago</div>
+                <div>Sep</div>
+                <div>Oct</div>
+                <div>Nov</div>
+                <div>Dic</div>
+              </section>
+            </div>
+          </div>
+          <!--   === Analytics Chart Ends ===   -->
+          </div>
+          <!--   === Column 1 Ends ===   -->
+          <!--   === Column 2 Starts ===   -->
+          <div class="col-2">
+            <!--   === Top Products Starts ===   -->
+            <div class="top-products">
+              <header class="products-header">
+                <h1>Productos Principales</h1>
+              </header>
+              <div class="products-wrapper">
+                
+                <div class="product">
+                  <div class="product-img">
+                    <img src="./recursos/imagenes/audifonos/argom.webp">
+                  </div>
+                  <div class="product-desc">
+                    <div class="product-row-1">
+                      <h2>Audifonos</h2>
+                      <i class="fa-solid fa-shopping-cart"></i>
+                    </div>
+                    <div class="product-row-2">
+                      <p>AURICULARES C/MICROFONO INALAMBRICOS ARGOM SKEIPOD E70 BLANCO </p>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="product">
+                  <div class="product-img">
+                    <img src="./recursos/imagenes/cornetas/cornetas-20-z207-bt-black-logitech.jpg">
+                  </div>
+                  <div class="product-desc">
+                    <div class="product-row-1">
+                      <h2>Cornetas</h2>
+                      <i class="fa-solid fa-shopping-cart"></i>
+                    </div>
+                    <div class="product-row-2">
+                      <p>CORNETAS LOGITECH Z207 2.0 BLUETOOTH </p>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="product">
+                  <div class="product-img">
+                    <img src="./recursos/imagenes/mouse/48787-large_default.webp">
+                  </div>
+                  <div class="product-desc">
+                    <div class="product-row-1">
+                      <h2>Mouse</h2>
+                      <i class="fa-solid fa-shopping-cart"></i>
+                    </div>
+                    <div class="product-row-2">
+                      <p>MOUSE GAMING USB AZZA 7BOTONES MSAZ-01C </p>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="product">
+                  <div class="product-img">
+                    <img src="./recursos/imagenes/cables utp/Bobina-305-Metros-Cat5e-Exteriores-Outdoor-LOGAN.webp">
+                  </div>
+                  <div class="product-desc">
+                    <div class="product-row-1">
+                      <h2>Cables UTP</h2>
+                      <i class="fa-solid fa-shopping-cart"></i>
+                    </div>
+                    <div class="product-row-2">
+                      <p>CABLE UTP CAT6 DAHUA DH-PFM920-6U 100% COBRE EXTERIOR </p>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="product">
+                  <div class="product-img">
+                    <img src="./recursos/imagenes/laptos/LAPTOP-HP-PAVILION-X360-14-DW0002LA-14-I5-1035G1-8GB-256GB-SSD-WIN10-GRIS.jpg">
+                  </div>
+                  <div class="product-desc">
+                    <div class="product-row-1">
+                      <h2>Laptop</h2>
+                      <i class="fa-solid fa-shopping-cart"></i>
+                    </div>
+                    <div class="product-row-2">
+                      <p>LAPTOP I5 10TH 14 HP PAVILION X360 14-DW0002LA  I5-1035G1/8GB/256GB SSD/WIN10 GRIS" </p>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="product">
+                  <div class="product-img">
+                    <img src="./recursos/imagenes/monitores/c3.jpg">
+                  </div>
+                  <div class="product-desc">
+                    <div class="product-row-1">
+                      <h2>Monitores</h2>
+                      <i class="fa-solid fa-shopping-cart"></i>
+                    </div>
+                    <div class="product-row-2">
+                      <p>MONITOR REFURBISHED DE 22"</p>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="product">
+                  <div class="product-img">
+                    <img src="./recursos/imagenes/router/D_NQ_NP_631377-MLV74724028322_032024-O.webp">
+                  </div>
+                  <div class="product-desc">
+                    <div class="product-row-1">
+                      <h2>Router</h2>
+                      <i class="fa-solid fa-shopping-cart"></i>
+                    </div>
+                    <div class="product-row-2">
+                      <p>ROUTER AX3000 GIGABIT DAHUA DUALBAND MODEL DH-AX30 WIFI 6 </p>
+                    </div>
+                  </div>
+                </div>
+      
+                <div class="product">
+                  <div class="product-img">
+                    <img src="./recursos/imagenes/case cpu/CASE-PARA-PC-AZZA-GAMING-CASE-MID-ATX-231G-BLAZE-PRISMA-RGB-FAN-1-320x320.jpg">
+                  </div>
+                  <div class="product-desc">
+                    <div class="product-row-1">
+                      <h2>Cases</h2>
+                      <i class="fa-solid fa-shopping-cart"></i>
+                    </div>
+                    <div class="product-row-2">
+                      <p>CASE GAMING PARA PC SIN FUENTE AZZA  CASE MID ATX 231G BLAZE PRISMA RGB FAN </p>
+                    </div>
+                  </div>
+                </div>
+      
+              </div>
+            </div>
+            <!--   === Top Products Ends ===   -->
+            <!--   === Total Balance Card Starts ===   -->
+            <div class="balance-card">
+              <div class="balance-card-top">
+                <div class="text">
+                  <h3>Ingresos totales</h3>
+                  <h1>$70,452<sub>(USD)</sub></h1>
+                </div>
+                <div class="icon">
+                  <i class="fa-solid fa-arrow-up"></i>
+                </div>
+              </div>
+              <div class="balance-card-middle">
+                <div class="subject">Progreso</div>
+                <div class="progress-bar">
+                  <div class="progress-line" value="93%" style="max-width: 93%"></div>
+                </div>
+              </div>
+              <div class="balance-card-bottom">
+                <button class="btn-top-up">
+                  Completar<i class="fa-solid fa-arrow-up"></i>
+                </button>
+                <button class="btn-transfer">
+                  Transferir<i class="fa-solid fa-arrow-up"></i>
+                </button>
+              </div>
+            </div>
+            <!--   === Total Balance Card Ends ===   -->
+          </div>
+          <!--   === Column 2 Ends ===   -->
+        </div>
+        <!--   === Description Ends ===   -->
+      </div>
+      <!--   === Contents Section Ends ===   -->
+      
+      </div>
+      <!--   *** Page Wrapper Ends ***   -->
+      
+   
+
+      <script src="./dashboard.js"></script>
+    </body>
+    
+  
+  </html>
