@@ -25,19 +25,32 @@
     if (empty($name) == false) {
         $where = "product_name like '%" . $name . "%' OR product_brand like '%" . $name . "%'";
     } //Buscador hasta aqui
-    
+
     // Categoría
     $catg = "";
-    $catego = $_REQUEST['ctg'] ?? '';// Obtiene el valor de la categoría
+    $catgName = "Todos nuestros productos"; //titulo del banner predeterminado
+    $catego = $_REQUEST['ctg'] ?? ''; // Obtiene el valor de la categoría
     if (!empty($catego)) {
         // Escapa el valor de $catego antes de usarlo en la consulta
         $escapedCatego = $con->quote($catego);
         $catg = "AND category = $escapedCatego";
+
+        //para seleccionar la categoria
+        $queryCatg = "SELECT name_catg FROM catg WHERE id=$catego";
+        $resCatg = $con->prepare($queryCatg);
+        $resCatg->execute();
+        $catgName = $resCatg->fetch(PDO::FETCH_ASSOC);
     } else {
         $catg = "";
+        $catgName = "Todo nuestros productos";
     }
+    $query_consult_catg = "SELECT  id, name_catg FROM catg";
+    $query_req_catg = $con->prepare($query_consult_catg);
+    $query_req_catg->execute();
+    //print_r($query_req_catg);
+    $consult_catg = $query_req_catg->fetchAll(PDO::FETCH_ASSOC);
     //aqui termina categoria
-        
+
     //Paginador
     $queryCount = "SELECT COUNT(*) AS count FROM products WHERE $where $catg ;";
     $resCount = $con->prepare($queryCount);
@@ -60,7 +73,7 @@
 
     $limit = "limit $limitStart,$itmspPage";
     //Paginador hasta aqui
-    
+
     $sql = $con->prepare("SELECT id_products, product_name, product_brand, year, price, discount FROM products WHERE $where $catg AND activo=1 $limit");
     $sql->execute();
 
@@ -119,18 +132,36 @@
         </div>
     </header>
     <main>
+        <div class="banner_category" style="background-image: url('resources/imgs/banners/<?php echo $catego ?? '' ?>.webp')">
+            <h1 class="banner_name"><?php echo $catgName['name_catg'] ?? $catgName ?></h1>
+        </div>
         <div class="container">
             <!-- Barra de busqueda  -->
-            <div class=" row row-cols-1 row-cols-sm-2 row-cols-md-3 py-2 flex-end ">
+            <div class=" row row-cols-1 row-cols-sm-2 row-cols-md-3 pt-3 flex-end ">
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" action="products.php">
                     <div class="input-group">
                         <input type="search" class="form-control" placeholder="Buscar..." aria-label="Search" aria-label="Search" name="name" value="<?php echo $_REQUEST['name'] ?? ''; ?>">
                         <button class="btn btn-outline-secondary " type="submit">
                             <i class="fas fa-search"></i>
                         </button>
-
                     </div>
                 </form>
+                <div>
+                    <p>
+                        <button class="btn btn-primary container-xxl" type="button" data-bs-toggle="collapse" data-bs-target="#contentId" aria-expanded="false" aria-controls="contentId" >
+                            Buscar por categorias
+                        </button>
+                    </p>
+                    <div class="collapse" id="contentId" >
+                        <h2>Categorias</h2>
+                        <ul class="catg_list"><!-- categorias  -->
+                            <li><a href="./products.php">TODOS</a></li>
+                            <?php foreach ($consult_catg as $row_catg) { ?>
+                                <li><a href="./products.php?ctg=<?php echo $row_catg['id'] ?>"><?php echo $row_catg['name_catg'] ?></a></li>
+                            <?php } ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 <?php foreach ($resultado as $row) { ?>
@@ -165,7 +196,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <a href="details.php?id=<?php echo $row['id_products']; ?>&token=<?php echo hash_hmac('sha1', $row['id_products'], KEY_TOKEN); ?>" class="btn btn-primary">Detalles</a>
-                                        
+
                                     </div>
 
                                     <button id="ToastBtn<?php echo $row['id_products']; ?>" class="btn btn-outline-primary" type="button" onclick="addProduct(<?php echo $row['id_products']; ?>,'<?php echo hash_hmac('sha1', $row['id_products'], KEY_TOKEN); ?>')">
@@ -174,6 +205,11 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                <?php }
+                if (!$resultado) { ?>
+                    <div>
+                        <h1>No hay productos</h1>
                     </div>
                 <?php } ?>
             </div>
@@ -203,7 +239,7 @@
                         if ($selectPage != $totalPages) {
                         ?>
                             <li class="page-item">
-                                <a class="page-link" href="products.php?page=<?php echo ($selectPage + 1);?>&ctg=<?php echo $catg ?>" aria-label="Next">
+                                <a class="page-link" href="products.php?page=<?php echo ($selectPage + 1); ?>&ctg=<?php echo $catg ?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -258,27 +294,26 @@
         }
     </script>
     <script>
-        
         const toastBTN = document.querySelectorAll('[id^="ToastBtn"]');
         const toast = document.getElementById('toastAddCart')
         const toastArray = Array.from(toastBTN);
 
         toastArray.forEach((toastShow) => {
-        const toastBootstrap = new bootstrap.Toast(toast);
-        toastShow.addEventListener('click', () => {
-            toastBootstrap.show();
+            const toastBootstrap = new bootstrap.Toast(toast);
+            toastShow.addEventListener('click', () => {
+                toastBootstrap.show();
+            });
         });
-        });
 
 
 
 
-        
+
         // const toastBTN = document.querySelectorAll('[id^="ToastBtn"]')
         // const toastBTNArray = Array.from(toastBTN)
         // 
 
-        
+
         // toastBTNArray.forEach((btn) => {
         //     const toastBootstrap = new bootstrap.Toast(btn)
         //     btn.addEventListener('click', () => {
@@ -286,8 +321,6 @@
         //     })
 
         // })
-
-        
     </script>
 </body>
 
