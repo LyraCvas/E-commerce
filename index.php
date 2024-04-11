@@ -132,6 +132,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
             </button>
         </section>
     </div>
+    <!-- Contenedor 2 -->
     <div class="contenedor2">
         <div class="contenedor_2">
             <div class="cuadro">
@@ -139,23 +140,14 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                     <div>
                         <img class="cuadro-imgs" src="./resources/imgs/laptos/lapto-_2_.webp" alt="" />
                     </div>
-                    <a class="cards-cont-btn" href="./products.php?ctg=laptops">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
-                        <span class="front text">Laptops </span>
-                    </a>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
                 </div>
 
                 <div class="cards-cont-2">
                     <div>
                         <img class="cuadro-imgs" src="./resources/imgs/impresoras/impresora.webp" alt="" />
                     </div>
-
-                    <a class="cards-cont-btn" href="./products.php?ctg=impresoras">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
-                        <span class="front text">Impresoras </span>
-                    </a>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
                 </div>
             </div>
             <div class="cuadro-2">
@@ -164,22 +156,14 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                         <img class="cuadro-imgs" src="./resources/imgs/monitores/monitor-4.webp" alt="" />
                     </div>
 
-                    <a class="cards-cont-btn" href="./products.php?ctg=monitores">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
-                        <span class="front text">Monitores </span>
-                    </a>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
                 </div>
                 <div class="cards-cont-2">
                     <div>
                         <img class="cuadro-imgs" src="./resources/imgs/relojes/reloj22.webp" alt="" />
                     </div>
 
-                    <a class="cards-cont-btn" href="./products.php?ctg=smartwatchs">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
-                        <span class="front text">SmartWatchs</span>
-                    </a>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
                 </div>
 
                 <div class="cards-cont-2">
@@ -187,11 +171,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                         <img class="cuadro-imgs" src="./resources/imgs/camaras/camara-1.webp" alt="" />
                     </div>
 
-                    <a class="cards-cont-btn" href="./products.php?ctg=camaras">
-                        <span class="shadow"></span>
-                        <span class="edge"></span>
-                        <span class="front text">Camaras </span>
-                    </a>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
                 </div>
             </div>
         </div>
@@ -200,71 +180,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     <div class="tituloofertas">
         <h1>OFERTAS ESPECIALES</h1>
     </div>
-
-    <div class="container_offerts">
-        <div class="card__container">
-            <article class="card__article">
-                <img src="./resources/imgs/mini ups/mini.png" alt="image" class="card__img" />
-
-                <div class="card__data">
-                    <span class="card__description">UPS MINI KP3</span>
-                    <h2 class="card__title">MARSRIVA 10000MAH/18W</h2>
-                    <a href="./details.php?id=11&token=80ef6d1fc8542ae2a626c50f1f50092d1243833b" class="card__button">Leer Más</a>
-                </div>
-            </article>
-
-            <article class="card__article">
-                <img src="./resources/imgs/mini ups/mini ups2.png" alt="image" class="card__img" />
-
-                <div class="card__data">
-                    <span class="card__description">UPS MINI KP2</span>
-                    <h2 class="card__title">MARSRIVA 10000MAH/18W</h2>
-                    <a href="./details.php?id=12&token=0bbb977503fc2c8ef4151aa3cec299eb827a926a" class="card__button">Leer Más</a>
-                </div>
-            </article>
-
-            <article class="card__article">
-                <img src="./resources/imgs/mini ups/mini ups negro2.png" alt="image" class="card__img" />
-
-                <div class="card__data">
-                    <span class="card__description">UPS MINI KP1-EC</span>
-                    <h2 class="card__title">MARSRIVA 8000MAH/18W</h2>
-                    <a href="./details.php?id=13&token=325e94ccff9f0004d64e8e6e10292bd89d96594f" class="card__button">Leer Más</a>
-                </div>
-            </article>
-        </div>
-
-        <div class="card__container">
-            <article class="card__article">
-                <img src="./resources/imgs/Ups/ups.webp" alt="image" class="card__img" />
-
-                <div class="card__data">
-                    <span class="card__description">UPS 500VA</span>
-                    <h2 class="card__title">240W 120VAC TONAL EM-500</h2>
-                    <a href="./details.php?id=15&token=14a338fd2caa7da24eecb67e3dc61b2a511f694c" class="card__button">Leer Más</a>
-                </div>
-            </article>
-
-            <article class="card__article">
-                <img src="./resources/imgs/mini ups/mini ups negro3.png" alt="image" class="card__img" />
-
-                <div class="card__data">
-                    <span class="card__description">UPS MINI KP2-EC</span>
-                    <h2 class="card__title">MARSRIVA 8000MAH/18W</h2>
-                    <a href="./details.php?id=14&token=2a4e129f95e6f0f36a9ef283cc63d29b18b0229c" class="card__button">Leer Más</a>
-                </div>
-            </article>
-
-            <article class="card__article">
-                <img src="./resources/imgs/Ups/D_NQ_NP_621107-MLV51078174229_082022-O-removebg-preview.webp" alt="image" class="card__img" />
-
-                <div class="card__data">
-                    <span class="card__description">UPS 500VA/250W </span>
-                    <h2 class="card__title">/120V CDP AVR/8 UPR-508</h2>
-                    <a href="./details.php?id=16&token=389c4af4ce76fcf76cfd741660978aba1b4c8a7a" class="card__button">Leer Más</a>
-                </div>
-            </article>
-        </div>
+    <div class="contenedor_video">
+        <video src="./resources/imgs/video background/video.mp4" autoplay loop muted></video>
+        <button class="btn1"><a class="btn_a" href="#"> Comprar </a></button>
     </div>
     <!--==heading====================-->
     <h4 class="product-slider-heading">Productos</h4>

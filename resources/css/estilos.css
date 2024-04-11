@@ -551,8 +551,8 @@ section{
 
 .btn1 {
   width: 6.5em;
-  height: 2.3em;
-  margin: 0.5em;
+  height: 1.90em;
+  /* padding: .375rem .75rem; */
   background: var(--color_fuente_leermas);
   color:var(--color_fuentes_principales);
   border: none;
@@ -565,11 +565,11 @@ section{
   overflow: hidden;
  }
  
- button a:hover {
+ .btn1 .btn_a:hover {
   color: var(--color_fuentes_principales);
  }
  
- button a:after {
+.btn1 .btn_a:after {
   content: "";
   background:var(--color_primario_background);
   color: var(--color_fuentes_principales);
@@ -583,7 +583,7 @@ section{
   transition: all 0.5s;
  }
  
- button a:hover:after {
+ .btn1 .btn_a:hover::after {
   color: var(--color_fuentes_principales);
   transform: skewX(-45deg) scale(1, 1);
   -webkit-transition: all 0.5s;
@@ -592,6 +592,8 @@ section{
 
  .btn_a{
   color: var(--color_fuentes_principales);
+  text-decoration: none;
+  width: 100%;
  }
 
 
@@ -1158,4 +1160,55 @@ align-items: end;
 
 .iconos_redes:hover {
   color: #d90429;
+}
+
+
+
+/* Codigo Sebastian */
+.img_product {
+  object-fit: contain;
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+
+.contenedor_img {
+  display: grid;
+  place-content: center;
+  margin: 0 auto;
+  padding: 3%;  
+}
+
+.contenedor_img-mini {
+  width: 60px;
+}
+
+.img_product-mini {
+  width: 100%;
+}
+
+.banner_category{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6% 0;
+  /*el background image esta en el HTML*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  image-rendering:optimizeQuality;
+}
+
+.banner_name{
+  filter: invert();
+}
+
+.catg_list{
+  column-count: 2;
+  column-gap: 25px;
+  list-style: none;
+}
+
+.catg_list a{
+  text-decoration: none;
 }
