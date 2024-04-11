@@ -5,8 +5,8 @@
   margin: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  text-decoration: none;
-  list-style: none;
+  /* text-decoration: none;
+  list-style: none; */
 }
 
 :root {
@@ -43,16 +43,12 @@ section{
   overflow: hidden;
 }
 
-
-
-.container{
+.navigation{
   max-width: 100%;
   padding: 0 2rem;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-
- 
   position: relative;
 }
 
@@ -66,8 +62,14 @@ section{
   flex: 3;
   display: flex;
 }
-
+.nav-list-links{
+  margin: auto;
+  padding: 0;
+}
 .nav-links{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex: 2;
 }
 
@@ -121,11 +123,13 @@ section{
   color: #fff;
   padding: 0 .8rem;
   letter-spacing: 1px;
-  font-size: .95rem;
+  font-size: 1.1rem;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
   transition: .5s;
+
 }
 
 .nav-link > a > i{
@@ -136,19 +140,20 @@ section{
   transform: scale(1.1);
 }
 
-.dropdown{
+.dropdown_vic{
   position: absolute;
   top: 100%;
   left: 0;
   width: 10rem;
   transform: translateY(10px);
   opacity: 0;
-  pointer-events: none;
+  pointer-events: none;  
   transition: .5s;
 }
 
-.dropdown ul{
+.dropdown_vic ul{
   position: relative;
+  list-style: none;
 }
 
 .dropdown-link > a{
@@ -160,6 +165,7 @@ section{
   align-items: center;
   justify-content: space-between;
   transition: .3s;
+  text-decoration: none;
 }
 
 .dropdown-link:hover > a{
@@ -197,33 +203,36 @@ section{
   position: relative;
 }
 
-.dropdown.second{
+.dropdown_vic.second{
   top: 0;
   left: 100%;
   padding-left: .8rem;
   cursor: pointer;
   transform: translateX(10px);
+  list-style: none;
 }
 
-.dropdown.second .arrow{
+.dropdown_vic.second .arrow{
   top: 10px;
   left: -5.5px;
 }
-
+.carrito{
+  list-style: none;
+}
 .carrito > a{
   line-height: 3rem;
   color: #fff;
   padding: 0 .8rem;
   letter-spacing: 1px;
-  font-size: 2.75rem;
+  font-size: 1.1rem;
   display: flex;
-  align-items: center;
- 
+  align-items: center; 
   transition: .5s;
+  
 }
 
 .log-sign{
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   gap: 1rem;
  
 }
@@ -237,8 +246,8 @@ section{
 }
 
 
-.nav-link:hover > .dropdown,
-.dropdown-link:hover > .dropdown{
+.nav-link:hover > .dropdown_vic,
+.dropdown-link:hover > .dropdown_vic{
   transform: translate(0, 0);
   opacity: 1;
   pointer-events: auto;
@@ -415,7 +424,7 @@ section{
  
   
 
-  .dropdown, .dropdown.second{
+  .dropdown_vic, .dropdown_vic.second{
       position: initial;
       top: initial;
       left: initial;
@@ -428,8 +437,8 @@ section{
       display: none;
   }
   
-  .nav-link:hover > .dropdown,
-  .dropdown-link:hover > .dropdown{
+  .nav-link:hover > .dropdown_vic,
+  .dropdown-link:hover > .dropdown_vic{
       display: block;
   }
 
@@ -445,11 +454,11 @@ section{
       line-height: 1;
   }
 
-  .dropdown.second .dropdown-link > a{
+  .dropdown_vic.second .dropdown-link > a{
       padding: 1.2rem 2rem 1.2rem 3rem;
   }
 
-  .dropdown.second .dropdown.second .dropdown-link > a{
+  .dropdown_vic.second .dropdown_vic.second .dropdown-link > a{
       padding: 1.2rem 2rem 1.2rem 4rem;
   }
 
@@ -469,7 +478,7 @@ section{
       background-color: #787777;
   }
 
-  .dropdown .dropdown .arrow{
+  .dropdown_vic .dropdown_vic .arrow{
       display: none;
   }
 
@@ -489,7 +498,7 @@ section{
 
  
 
-  .dropdown i{
+  .dropdown_vic i{
       font-size: 1rem;
       transition: .7s;
   }
@@ -524,7 +533,7 @@ section{
   height: 80vh;
   position: relative;
   display: flex;
-  background-image: url('../imagenes/background/WD55PizRMXhUHKXL.webp');
+  background-image: url('../imgs/background/WD55PizRMXhUHKXL.webp');
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

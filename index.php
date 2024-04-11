@@ -5,97 +5,131 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rhinotech</title>
-    <link rel="stylesheet" href="./resources/css/style.css" />
+    <link rel="stylesheet" href="./resources/css/estilos.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/9a29282719.js" crossorigin="anonymous"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 <?php
-    require 'config/config.php';
-    require 'config/conexionbd.php';
-    $db = new Database();
-    $con = $db->conectar();
+require 'config/config.php';
+require 'config/conexionbd.php';
+$db = new Database();
+$con = $db->conectar();
 
-    $sql = $con->prepare("SELECT id_products, product_name, product_brand, year, price, discount, category FROM products WHERE activo=1 ");
-    $sql->execute();
+$sql = $con->prepare("SELECT id_products, product_name, product_brand, year, price, discount, category FROM products WHERE activo=1 ");
+$sql->execute();
 
-    //print_r($sql);
+//print_r($sql);
 
-    $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
-    ?>
+$resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <body>
     <!-- header -->
     <header>
-        <div class="header__superior">
-            <div class="logo">
-                <img src="./resources/imgs/logos/Rhino Tech -1.png" alt="" />
+        <nav class="navigation">
+            <input type="checkbox" name="" id="check">
+            <div class="logo-container">
+                <img class="logo" src="./resources/imgs/logos/Rhino Tech -1.png" alt="">
             </div>
+            <div class="nav-btn">
+                <div class="nav-links">
+                    <ul class="nav-list-links">
+                        <li class="nav-link" style="--i: .6s">
+                            <a href="./index.php">Inicio</a>
+                        </li>
+                        <li class="nav-link" style="--i: .85s">
+                            <a href="./products.php">Productos<i class="fas fa-caret-down"></i></a>
+                            <div class="dropdown_vic">
+                                <ul>
+                                    <li class="dropdown-link">
+                                        <a href="#">Laptops</a>
+                                    </li>
+                                    <li class="dropdown-link">
+                                        <a href="#">Impresoras</a>
+                                    </li>
+                                    <li class="dropdown-link">
+                                        <a href="#">Audifonos<i class="fas fa-caret-down"></i></a>
+                                        <div class="dropdown_vic second">
+                                            <ul>
+                                                <li class="dropdown-link">
+                                                    <a href="#">Teclados</a>
+                                                </li>
+                                                <li class="dropdown-link">
+                                                    <a href="#">Cornetas</a>
+                                                </li>
+                                                <li class="dropdown-link">
+                                                    <a href="#">Router</a>
+                                                </li>
+                                                <li class="dropdown-link">
+                                                    <a href="#">Más<i class="fas fa-caret-down"></i></a>
+                                                    <div class="dropdown_vic second">
+                                                        <ul>
+                                                            <li class="dropdown-link">
+                                                                <a href="#">Cables UTP</a>
+                                                            </li>
+                                                            <li class="dropdown-link">
+                                                                <a href="#">Modem</a>
+                                                            </li>
+                                                            <li class="dropdown-link">
+                                                                <a href="#">Mouses</a>
+                                                            </li>
+                                                            <div class="arrow"></div>
+                                                        </ul>
 
-            <div class="carrito">
-                <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ">
-                    <a href="cart_list.php" type="button" class="btn btn-primary position-relative">
-                        <i class="fa-solid fa-cart-shopping"></i><span id="num_cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $num_cart; ?></span>
-                    </a>
+
+                                                    </div>
+                                                </li>
+                                                <div class="arrow"></div>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-link" style="--i: .6s">
+                            <a href="#">Nosotros</a>
+                        </li>
+                        <li class="nav-link" style="--i: .6s">
+                            <a href="./contacto.html">Contactos</a>
+                        </li>
+
+                        </li>
+                        <li class="nav-link" style="--i: .6s">
+                            <a href="./dashboard.html"><i class='bx bxs-dashboard'></i></a>
+                        </li>
+                        <li class="nav-link carrito" style="--i: .6s">
+                            <a href="cart_list.php" type="button" class=" position-relative">
+                                <i class='fa-solid fa-cart-shopping'></i> <span id="num_cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $num_cart; ?></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="log-sign" style="--i: 1.8s">
+                    <a href=""><i class='bx bx-user'></i></a>
+                    <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-de-las-islas-periféricas-de-ee-uu-48.png" alt="" /></a>
+                    <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-españa-48.png" alt="" /></a>
                 </div>
             </div>
-            <div class="banderas">
-                <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-de-las-islas-periféricas-de-ee-uu-48.png" alt="" />
-                </a>
-                <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-españa-48.png" alt="" /></a>
+            <div class="hamburger-menu-container">
+                <div class="hamburger-menu">
+                    <div class="ham"></div>
+                </div>
             </div>
-        </div>
-
-        <div class="container__menu">
-            <div class="menu">
-                <input type="checkbox" id="check__menu" />
-                <label for="check__menu" id="label__check">
-                    <i class="fas fa-bars icon__menu"></i>
-                </label>
-                <nav class="menu_nav">
-                    <ul class="menu_list">
-                        <li class="menu_litem">
-                            <a href="./index.php" id="selected"><i class="fa-solid fa-house"></i></a>
-                        </li>
-                        <li class="menu_litem">
-                            <a href="./products.php">Tienda</a>
-                            <ul class="menu_list">
-                                <li class="menu_litem"><a href="./products.php?ctg=laptops">Laptos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=desktop">Desktop</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=impresoras">Impresoras</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=audifonos">Audifonos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=teclados">Teclados</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu_litem"><a href="#">Nosotros</a></li>
-                        <li class="menu_litem"><a href="#">Blog</a></li>
-                        <li class="menu_litem"><a href="#">Contactos</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+        </nav>
     </header>
 
     <div class="fondo1">
-        <section class="titulo1">
-            <!-- <p>Inalambricos</p> -->
-        </section>
-        <section class="imagenprincipal">
-            <img src="./resources/imgs/audifonos/audifonos.webp" alt="" />
-        </section>
-        <section class="titulo2">
-            <h2 class="titulo2">Auriculares</h2>
-        </section>
         <section class="boton1">
-            <a class="cards-cont-btn" href="./products.php?ctg=audifonos">
-                <span class="shadow"></span>
-                <span class="edge"></span>
-                <span class="front text">Catalogo </span>
-            </a>
+            <button class="btn1"><a class="btn_a" href="#"> Comprar </a>
+            </button>
         </section>
     </div>
     <div class="contenedor2">
