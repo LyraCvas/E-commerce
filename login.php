@@ -64,6 +64,9 @@ if(!empty($_POST)){
                     </a>
                 </div>
             </div>
+
+            
+            
             <div class="banderas">
                 <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-de-las-islas-periféricas-de-ee-uu-48.png" alt="" />
                 </a>

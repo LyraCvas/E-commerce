@@ -16,6 +16,7 @@
     <?php
     require 'config/config.php';
     require 'config/conexionbd.php';
+    require 'clases/clienteFunciones.php';
     $db = new Database();
     $con = $db->conectar();
 
@@ -81,6 +82,10 @@
                         <i class="fa-solid fa-cart-shopping"></i><span id="num_cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $num_cart; ?></span>
                     </a>
                 </div>
+
+            
+            
+            
             </div>
             <div class="banderas">
                 <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-de-las-islas-periféricas-de-ee-uu-48.png" alt="" />

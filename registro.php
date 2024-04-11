@@ -53,7 +53,7 @@ if(!empty($_POST)){
 
             $pass_hash = password_hash($password, PASSWORD_DEFAULT);
            
-            $idUsuario = registraUsuario([$usuario, $password, $token, $id], $con);
+            $idUsuario = registraUsuario([$usuario, $pass_hash, $token, $id], $con);
             if ($idUsuario > 0){
 
                 $url = SITE_URL . '/activa_cliente.php?id=' .$idUsuario .'&token=' .$token;
@@ -72,7 +72,7 @@ if(!empty($_POST)){
                       $errors[] = "Error al registrar usuario";
                 }
                 
-                } else{
+        } else{
             $errors[] = "Error al registrar cliente";
         }
 

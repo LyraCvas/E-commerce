@@ -18,6 +18,8 @@
 <?php
     require 'config/config.php';
     require 'config/conexionbd.php';
+    require 'clases/clienteFunciones.php';
+
     $db = new Database();
     $con = $db->conectar();
 
@@ -27,6 +29,8 @@
     //print_r($sql);
 
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
+
+ 
     ?>
 <body>
     <!-- header -->
@@ -43,7 +47,19 @@
                     </a>
                 </div>
             </div>
-            <div class="banderas">
+
+            <?php if(isset($_SESSION['user_id'])){ ?>
+            <a href="#" class="btn btn-success">
+                 <i class="fa-solid fa-user"></i> <?php echo $_SESSION['user_name'];?></a>
+            
+            <?php } else {?>
+                <a href="login.php" class="btn btn-success">
+                 <i class="fa-solid fa-user"></i> Ingresar</a>
+            <?php }?>
+            
+            
+            
+                 <div class="banderas">
                 <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-de-las-islas-periféricas-de-ee-uu-48.png" alt="" />
                 </a>
                 <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-españa-48.png" alt="" /></a>
