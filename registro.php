@@ -49,14 +49,17 @@ if(!empty($_POST)){
             require 'clases/Mailer.php';
             $mailer = new  Mailer();
             $token = generarToken();
-            $url = SITE_URL . 'activa_cliente.php?id=' .$id .'&token=' .$token;
-            $asunto = "Activar cuenta - Tienda online";
-            $cuerpo ="Estimado $nombres: <br> Para continuar con el proceso de registro es indispensable en la
-            sigiente liga <a href='$url'>Activar Cuenta </a>";
+     
 
             $pass_hash = password_hash($password, PASSWORD_DEFAULT);
            
-            if (registraUsuario([$usuario, $password, $token, $id], $con)){
+            $idUsuario = registraUsuario([$usuario, $password, $token, $id], $con);
+            if ($idUsuario > 0){
+
+                $url = SITE_URL . '/activa_cliente.php?id=' .$idUsuario .'&token=' .$token;
+                $asunto = "Activar cuenta - Tienda online";
+                $cuerpo ="Estimado $nombres: <br> Para continuar con el proceso de registro es indispensable en la
+                sigiente liga <a href='$url'>Activar Cuenta </a>";
 
                 if($mailer->enviarEmail($email, $asunto, $cuerpo)){
                     echo "Para terminar el proceso de registro siga las instrucciones que le hemos enviado a la
@@ -74,7 +77,7 @@ if(!empty($_POST)){
         }
 
     }
-    
+
 }
 
 

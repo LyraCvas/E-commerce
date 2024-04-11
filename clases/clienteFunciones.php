@@ -52,10 +52,10 @@ function registraUsuario(array $datos, $con){
     
     if($sql->execute($datos)){
        
-        return true;
+        return $con->lastInsertId();
     }
 
-    return false;
+    return 0;
 }
 
 function usuarioExiste($usuario, $con){
@@ -101,4 +101,65 @@ function mostrarMensajes(array $errors){
 
     }
 }
+
+
+function validaToken($id, $token, $con)
+{
+    $msg = "";
+    $sql = $con->prepare("SELECT id FROM usuarios WHERE id = ? AND token LIKE ? LIMIT 1");
+    $sql->execute([$id, $token]);
+    if($sql->fetchColumn() > 0){
+       if (activarUsuario($id,$con)){
+        $msg = "¡Haz activado  tu cuenta!";
+       } else {
+        $msg = "Error al activar cuenta.";
+       }
+    } else {
+        $msg = "No existe el registro del ciente";
+    }
+
+    return $msg;
+
+}
+
+function activarUsuario($id, $con){
+    $sql = $con->prepare("UPDATE usuarios SET activacion = 1, token = '' WHERE id = ?");
+    return  $sql->execute([$id]);
+}
+
+function login($usuario, $password,$con){
+    $sql = $con->prepare("SELECT id, password FROM usuarios WHERE usuarios LIKE ? LIMIT 1");
+    $sql = execute([$usuario]);
+
+    if($row = $sql->fetch(PDO::FETCH_ASSOC)) {
+
+        if(esActivo($usuario, $con)){
+            if (password_verify($password, $row['password'])){
+                $_SESSION['user_id'] =  $row['id'];
+                $_SESSION['user_name'] =  $row['usuario'];
+                header("Location: index.php");
+                exit;
+            }
+        } else{
+            return 'El usuario no ha sido activado';
+        }
+
+    }
+    return 'El usuario y/o contraseña son  incorrectos';
+}
+
+function esActivo($usuario, $con){
+    $sql = $con->prepare("SELECT activacion, password FROM usuarios WHERE usuarios LIKE ? LIMI 1");
+    $sql = excecute([$usuario]);
+    $row = $sql->fetch(PDO::FETCH_ASSOC);
+
+    if($row['activacion'] == 1){
+        return true;
+    }
+
+    return false;
+}
+
+
+
 ?>
