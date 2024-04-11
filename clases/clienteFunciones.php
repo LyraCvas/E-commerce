@@ -127,14 +127,13 @@ function activarUsuario($id, $con){
     return  $sql->execute([$id]);
 }
 
-function login($usuario, $password,$con){
-    $sql = $con->prepare("SELECT id, password FROM usuarios WHERE usuarios LIKE ? LIMIT 1");
-    $sql = execute([$usuario]);
-
+function login($usuario, $password, $con){
+    $sql = $con->prepare("SELECT id, usuario, password FROM usuarios WHERE usuario LIKE ? LIMIT 1");
+    $sql->execute([$usuario]);
     if($row = $sql->fetch(PDO::FETCH_ASSOC)) {
 
         if(esActivo($usuario, $con)){
-            if (password_verify($password, $row['password'])){
+            if(password_verify($password, $row['password'])){
                 $_SESSION['user_id'] =  $row['id'];
                 $_SESSION['user_name'] =  $row['usuario'];
                 header("Location: index.php");
@@ -149,8 +148,8 @@ function login($usuario, $password,$con){
 }
 
 function esActivo($usuario, $con){
-    $sql = $con->prepare("SELECT activacion, password FROM usuarios WHERE usuarios LIKE ? LIMI 1");
-    $sql = excecute([$usuario]);
+    $sql = $con->prepare("SELECT activacion FROM usuarios WHERE usuario LIKE ? LIMIT 1");
+    $sql->execute([$usuario]);
     $row = $sql->fetch(PDO::FETCH_ASSOC);
 
     if($row['activacion'] == 1){
