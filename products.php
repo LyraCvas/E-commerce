@@ -82,9 +82,9 @@
     $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
     ?>
     <!-- Header -->
-    <?php include_once './clases/header.php'?>
+    <?php include_once './clases/header.php' ?>
 
-    <main>
+    <main class="cobija">
         <div class="banner_category" style="background-image: url('resources/imgs/banners/<?php echo $catego ?? '' ?>.webp')">
             <h1 class="banner_name"><?php echo $catgName['name_catg'] ?? $catgName ?></h1>
         </div>
@@ -101,16 +101,16 @@
                 </form>
                 <div>
                     <p>
-                        <button class="btn1 container-xxl" type="button" data-bs-toggle="collapse" data-bs-target="#contentId" aria-expanded="false" aria-controls="contentId" >
-                           <a class=" btn_a">Buscar por categorias</a>
+                        <button class="btn1 container-xxl" type="button" data-bs-toggle="collapse" data-bs-target="#contentId" aria-expanded="false" aria-controls="contentId">
+                            <a class=" btn_a">Buscar por categorias</a>
                         </button>
                     </p>
-                    <div class="collapse" id="contentId" >
+                    <div class="collapse" id="contentId">
                         <h2>Categorias</h2>
                         <ul class="catg_list"><!-- categorias  -->
-                            <li><a href="./products.php">TODOS</a></li>
+                            <li><a class="catg-link" href="./products.php">TODOS</a></li>
                             <?php foreach ($consult_catg as $row_catg) { ?>
-                                <li><a href="./products.php?ctg=<?php echo $row_catg['id'] ?>"><?php echo $row_catg['name_catg'] ?></a></li>
+                                <li><a class="catg-link" href="./products.php?ctg=<?php echo $row_catg['id'] ?>"><?php echo $row_catg['name_catg'] ?></a></li>
                             <?php } ?>
                         </ul>
                     </div>
@@ -131,20 +131,20 @@
                                 <img class="img_product" src="<?php echo $img ?>" alt="">
                             </div>
                             <div class="card-body">
-                                <p class="card-text"><?php echo $row['product_name'] ?></p>
-                                <p class="card-text"><?php echo $row['product_brand'] ?></p>
-                                <p class="card-text"><?php echo $row['year'] ?></p>
+                                <p class="card-text" style="gap: 5px;"><?php echo $row['product_brand'] ?> <?php echo $row['product_name'] ?></p>
+                                <!-- <p class="card-text"></p> -->
+                                <!-- <p class="card-text"><?php //echo $row['year'] ?></p> -->
                                 <?php if ($row['discount'] > 0) { ?>
                                     <div class="d-flex justify-content-start align-items-center gap-1">
-                                        <h5 class="text-muted"><del><?php echo MONEDA . number_format($row['price'], 2, '.', ','); ?></del></h5>
                                         <h5>
                                             <?php echo MONEDA . number_format(($row['price'] - ($row['price'] * $row['discount'] / 100)), 2, '.', ','); ?>
-                                            <small class="text-success"><?php echo $row['discount'] ?>%</small>
                                         </h5>
+                                        <small class="text-muted"><del><?php echo MONEDA . number_format($row['price'], 2, '.', ','); ?></del></small>
+                                            <small class="text-success"><?php echo $row['discount'] ?>%</small>
                                     </div>
 
                                 <?php } else { ?>
-                                    <h5 class="text-muted"><?php echo MONEDA . number_format($row['price'], 2, '.', ','); ?></h5>
+                                    <h5><?php echo MONEDA . number_format($row['price'], 2, '.', ','); ?></h5>
                                 <?php } ?>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">

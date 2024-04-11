@@ -27,6 +27,11 @@
   --item-width: calc(var(--menu-width) / var(--items));
 }
 
+body{/*para bajar el footer en las paginas pequeñas*/
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
 
 header{
   position: sticky;
@@ -36,12 +41,12 @@ header{
   z-index: 1000;
 }
 
-section{
+/* section{
   position: relative;
   height: calc(100vh - 3rem);
   width: 100%;
   overflow: hidden;
-}
+} */
 
 .navigation{
   max-width: 100%;
@@ -348,7 +353,7 @@ section{
   .nav-btn{
       position: fixed;
       height: calc(100vh - 3rem);
-      top: 4rem;
+      top: 3.7rem;
       left: 0;
       width: 100%;
       background-color: #3c3c3c;
@@ -530,7 +535,7 @@ section{
 }
 .fondo1 {
   width: 100%;
-  height: 80vh;
+  height: 93.7vh;
   position: relative;
   display: flex;
   background-image: url('../imgs/background/WD55PizRMXhUHKXL.webp');
@@ -686,7 +691,6 @@ section{
 
 .tituloofertas {
   width: 100%;
-  height: 30vh;
   justify-content: center;
   text-align: center;
   color: var(--color_primario_background);
@@ -702,25 +706,23 @@ section{
 /*=============== CARD ===============*/
 .contenedor_video {
   width: 100%;
-  height:90vh;
   display: flex;
   justify-content: end;
   align-items: end;
- 
- 
-
-  
+  position: relative;
 }
 video{
  width: 100%;
+ aspect-ratio: 16/9;
   justify-content: end;
   align-items: end;
   text-align: end;
-  position: absolute;
-
   
- 
-
+}
+.btn_buy_esp{
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
 }
 
 button .btn{
@@ -1111,7 +1113,8 @@ align-items: end;
 
 .footer {
   width: 100%;
-  height: 30vh;
+  margin-top: auto;
+  /* height: 30vh; */
   background-color: var(--color_primario_background);
 }
 
@@ -1161,7 +1164,16 @@ align-items: end;
 .iconos_redes:hover {
   color: #d90429;
 }
-
+@media (max-width: 550px) {
+  .logo_centrado{
+    flex-direction: column;
+  }
+  .catg_list{
+    column-count: 2;
+    column-gap: 40px;
+    
+  }
+}
 
 
 /* Codigo Sebastian */
@@ -1204,6 +1216,8 @@ align-items: end;
 }
 
 .catg_list{
+  padding: 0;
+  margin: 0;
   column-count: 2;
   column-gap: 25px;
   list-style: none;
@@ -1211,4 +1225,9 @@ align-items: end;
 
 .catg_list a{
   text-decoration: none;
+}
+
+
+.catg-link{
+  color: var(--color_fuente_leermas);
 }

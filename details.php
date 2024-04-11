@@ -21,11 +21,12 @@ if ($id == '' || $token == '') {
         $sql = $con->prepare("SELECT count(id_products) FROM products WHERE id_products=? AND activo=1 ");
         $sql->execute([$id]);
         if ($sql->fetchColumn() > 0) {
-            $sql = $con->prepare("SELECT product_name, product_brand, descrip, price, discount FROM products WHERE id_products=? AND activo=1");
+            $sql = $con->prepare("SELECT product_name, product_brand, year, descrip, price, discount FROM products WHERE id_products=? AND activo=1");
             $sql->execute([$id]);
             $row = $sql->fetch(PDO::FETCH_ASSOC);
             $name = $row['product_name'];
             $brand = $row['product_brand'];
+            $year = $row['year'];
             $descrp = $row['descrip'];
             $price = $row['price'];
             $discount = $row['discount'];
@@ -108,12 +109,13 @@ if ($id == '' || $token == '') {
                 <div class="col-md-6 order-md-2">
                     <h2><?php echo $name ?></h2>
                     <h3><?php echo $brand ?></h3>
+                    <h3> de el año <?php echo $year ?></h3>
                     <?php if ($discount > 0) { ?>
-                        <p><del><?php echo MONEDA . number_format($price, 2, '.', ','); ?></del></p>
-                        <h2>
+                        <h4><del><?php echo MONEDA . number_format($price, 2, '.', ','); ?></del></h4>
+                        <h3>
                             <?php echo MONEDA . number_format($price_discount, 2, '.', ','); ?>
                             <small class="text-success"><?php echo $discount ?>%</small>
-                        </h2>
+                        </h3>
                     <?php } else { ?>
                         <h3><?php echo MONEDA . number_format($price, 2, '.', ','); ?></h3>
                     <?php } ?>
