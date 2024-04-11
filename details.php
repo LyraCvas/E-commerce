@@ -21,11 +21,12 @@ if ($id == '' || $token == '') {
         $sql = $con->prepare("SELECT count(id_products) FROM products WHERE id_products=? AND activo=1 ");
         $sql->execute([$id]);
         if ($sql->fetchColumn() > 0) {
-            $sql = $con->prepare("SELECT product_name, product_brand, descrip, price, discount FROM products WHERE id_products=? AND activo=1");
+            $sql = $con->prepare("SELECT product_name, product_brand, year, descrip, price, discount FROM products WHERE id_products=? AND activo=1");
             $sql->execute([$id]);
             $row = $sql->fetch(PDO::FETCH_ASSOC);
             $name = $row['product_name'];
             $brand = $row['product_brand'];
+            $year = $row['year'];
             $descrp = $row['descrip'];
             $price = $row['price'];
             $discount = $row['discount'];
@@ -71,62 +72,15 @@ if ($id == '' || $token == '') {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Bootstrap CSS v5.3.3 -->
+    <link rel="stylesheet" href="./resources/css/estilos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="./resources/css/style.css">
+    
 </head>
 
 <body>
     <!-- Header -->
-    <header>
-        <div class="header__superior">
-            <div class="logo">
-                <img src="./resources/imgs/logos/Rhino Tech -1.png" alt="" />
-            </div>
-
-            <div class="carrito">
-                <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ">
-                    <a href="cart_list.php" type="button" class="btn btn-primary position-relative">
-                        <i class="fa-solid fa-cart-shopping"></i><span id="num_cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $num_cart; ?></span>
-                    </a>
-                </div>
-            </div>
-            <div class="banderas">
-                <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-de-las-islas-periféricas-de-ee-uu-48.png" alt="" />
-                </a>
-                <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-españa-48.png" alt="" /></a>
-            </div>
-        </div>
-
-        <div class="container__menu">
-            <div class="menu">
-                <input type="checkbox" id="check__menu" />
-                <label for="check__menu" id="label__check">
-                    <i class="fas fa-bars icon__menu"></i>
-                </label>
-                <nav class="menu_nav">
-                    <ul class="menu_list">
-                        <li class="menu_litem">
-                            <a href="./index.php" id="selected"><i class="fa-solid fa-house"></i></a>
-                        </li>
-                        <li class="menu_litem">
-                            <a href="./products.php">Tienda</a>
-                            <ul class="menu_list">
-                                <li class="menu_litem"><a href="./products.php?ctg=laptops">Laptos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=desktop">Desktop</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=impresoras">Impresoras</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=audifonos">Audifonos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=teclados">Teclados</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu_litem"><a href="#">Nosotros</a></li>
-                        <li class="menu_litem"><a href="#">Blog</a></li>
-                        <li class="menu_litem"><a href="#">Contactos</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <?php include_once './clases/header.php'?>
     <main>
         <div class="container">
             <div class="row">
@@ -155,12 +109,13 @@ if ($id == '' || $token == '') {
                 <div class="col-md-6 order-md-2">
                     <h2><?php echo $name ?></h2>
                     <h3><?php echo $brand ?></h3>
+                    <h3> de el año <?php echo $year ?></h3>
                     <?php if ($discount > 0) { ?>
-                        <p><del><?php echo MONEDA . number_format($price, 2, '.', ','); ?></del></p>
-                        <h2>
+                        <h4><del><?php echo MONEDA . number_format($price, 2, '.', ','); ?></del></h4>
+                        <h3>
                             <?php echo MONEDA . number_format($price_discount, 2, '.', ','); ?>
                             <small class="text-success"><?php echo $discount ?>%</small>
-                        </h2>
+                        </h3>
                     <?php } else { ?>
                         <h3><?php echo MONEDA . number_format($price, 2, '.', ','); ?></h3>
                     <?php } ?>
