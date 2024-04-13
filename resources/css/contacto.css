@@ -36,7 +36,7 @@
 }
 
 .container-form form .campo, textarea{
-  width: 100%;
+    width: 100%;
     padding: 15px 10px;
     font-size: 15px;
     border: 1px solid #dbdbdb;
@@ -70,12 +70,21 @@
 
 .info-form h2 p a {
     margin-right: 20px;
+    text-overflow:clip;
 }
 
 
 @media (max-width: 768px) {
   .container-form{
+    max-width: auto;
     grid-template-columns: repeat(1, 1fr);
   }
+
+  .container-form form textarea{
+    max-width: auto;
+    min-width: auto;
+    max-height: auto;
+    min-height: auto;
+}
 
 }

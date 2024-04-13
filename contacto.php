@@ -11,14 +11,54 @@ require './phpmailer/src/PHPMailer.php';
 require './phpmailer/src/SMTP.php';
 require './phpmailer/src/Exception.php';
 
-if (isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
   $nombre = $_POST['nombre'];
-  $email= $_POST['email'];
+  $email = $_POST['email'];
   $asunto = $_POST['asunto'];
   $mensaje = $_POST['mensaje'];
+
   $errors = array();
-  if (empty($nombre)){
+  if (empty($nombre)) {
     $errors[] = 'el campo nombre es obligatorio';
+  }
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    $errors[] = 'la direccion de correo no es valida';
+  }
+  if (empty($asunto)) {
+    $errors[] = 'el campo asunto es obligatorio';
+  }
+  if (empty($mensaje)) {
+    $errors[] = 'el campo mensaje es obligatorio';
+  }
+
+  if (count($errors) == 0) {
+    $mjs = "De: $nombre <a href='mailto:$email'>$email</a><br>";
+    $mjs .= "Asunto: $asunto <br><br>";
+    $mjs .= "Cuerpo del mensaje:";
+    $mjs .= '<p>' . $mensaje . '</p>';
+
+    $mail = new PHPMailer(true);
+    try {
+      $mail->SMTPDebug = SMTP::DEBUG_OFF;
+      $mail->isSMTP();
+      $mail->Host       = 'smtp.gmail.com';
+      $mail->SMTPAuth   = true;
+      $mail->Username   = 'ecommerceluzcva@gmail.com';
+      $mail->Password   = 'tycq abwc ptax ogml';
+      $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+      $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+      $mail->setFrom('ecommerceluzcva@gmail.com', 'contacto');
+      $mail->addAddress('sebastianlira2010@hotmail.com', 'Contacto');
+
+      $mail->isHTML(true);
+      $mail->Subject = 'Formulario de Contacto';
+      $mail->Body = $mjs;
+      $mail->send();
+
+      $respuesta = 'correo enviado';
+    } catch (Exception $e) {
+      $respuesta  = 'Mensaje' . $mail->ErrorInfo;
+    }
   }
 }
 
@@ -47,32 +87,62 @@ if (isset($_POST['submit'])){
 
   <?php include_once 'clases/header.php' ?>
 
-
-
-  <div class="container-form d-flex">
-    <div class="info-form row col-md-6 col-12">
+  <div class="container container-form pt-3">
+    <div class="row col-md-12 col-lg-10 info-form">
       <h2>Contactanos</h2>
       <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Alias libero corrupti quaerat veniam et temporibus. Hic laborum ducimus eius voluptas dolore explicabo commodi, eum facere ex nulla minus, perferendis dicta.</p>
       <a href="tel:+4128780067"><i class="fa fa-phone">04128780061</i></a>
-      <a href="mailto:rhinotechdesign@gmail.com"> <i class="fa fa-envelope">Rhinotechdesign@gmail.com</i></a>
+      <a href="mailto:rhinotechdesign@gmail.com"><i class="fa fa-envelope">Rhinotechdesign@gmail.com</i></a>
       <address><i class="fa fa-map-marked"></i><span> Ciudad.Pais </span></address>
     </div>
-    <div class="row ">
-      
-        <form action="#" autocomplete="off">
-        <input type="text" name="nombre" placeholder="Ingresa tu nombre" class="campo">
-        <input type="email" name="email" placeholder="Ingresa tu correo" class="campo">
-        <textarea name="mensaje" placeholder="Dejanos un mensaje"></textarea>
-        <input type="submit" name="enviar" value="Enviar mensaje" class="btn-enviar">
+    <div class="row col-md-12 col-lg-10 ">
+      <?php
+      if (isset($errors)) {
+        if (count($errors) > 0) {
+      ?>
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <?php
+            foreach ($errors as $error) {
+              echo $error . '<br>';
+            }
+            ?>
+          </div>
+      <?php
+        }
+      } ?>
+      <form class="form" method="POST" action="<?php echo htmlentities($_SERVER['PHP_SELF']) ?>" autocomplete="off">
+        <div class="mb-1">
+          <!-- <label for="nombre" class="form-label">Nombre</label> -->
+          <input type="text" name="nombre" id="nombre" placeholder="Ingresa tu nombre" class="campo form-control" required autofocus>
+        </div>
+        <div class="mb-1">
+          <!-- <label for="email" class="form-label">Email</label> -->
+          <input type="email" name="email" id="email" placeholder="Ingresa tu correo" class="campo form-control" required>
+        </div>
+        <div class="mb-1">
+          <!-- <label for="asunto" class="form-label">Asunto</label> -->
+          <input name="asunto" id="asunto" placeholder="De que se trata tu peticion" class="campo form-control" required>
+        </div>
+        <div class="mb-1">
+          <!-- <label for="mensaje" class="form-label">Mensaje</label> -->
+          <textarea name="mensaje" id="mensaje" placeholder="Dejanos un mensaje" class="campo form-control" rows="3" required></textarea>
+        </div>
+        <div class="mb-1">
+          <button type="submit" name="submit" class="btn1 w-100">Enviar</button>
+        </div>
       </form>
-      
-      
     </div>
-
+    <?php if (isset($respuesta)){?>
+       <div class="row">
+       <div class="col-lg-8 col-md-10">
+          <?php echo $respuesta; ?>
+       </div>
+       </div>
+    <?php }?>
   </div>
 
 
-<?php include_once 'clases/footer.php'?>
+  <?php //include_once 'clases/footer.php' ?>
 
 </body>
 

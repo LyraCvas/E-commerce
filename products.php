@@ -94,7 +94,7 @@
                 <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" action="products.php">
                     <div class="input-group">
                         <input type="search" class="form-control" placeholder="Buscar..." aria-label="Search" aria-label="Search" name="name" value="<?php echo $_REQUEST['name'] ?? ''; ?>">
-                        <button class="btn btn-outline-secondary " type="submit">
+                        <button class="btn1 " type="submit">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -116,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-3">
                 <?php foreach ($resultado as $row) { ?>
                     <div class="col">
                         <div class="card shadow-sm">
@@ -131,10 +131,7 @@
                                 <img class="img_product" src="<?php echo $img ?>" alt="">
                             </div>
                             <div class="card-body">
-                                <p class="card-text" style="gap: 5px;"><?php echo $row['product_brand'] ?> <?php echo $row['product_name'] ?></p>
-                                <!-- <p class="card-text"></p> -->
-                                <!-- <p class="card-text"><?php //echo $row['year'] 
-                                                            ?></p> -->
+                                <p class="card-text" style="gap: 5px;"><?php echo $row['product_brand'] ?> <?php echo $row['product_name'] ?></p>                                                            
                                 <?php if ($row['discount'] > 0) { ?>
                                     <div class="d-flex justify-content-start align-items-center gap-1">
                                         <h5>

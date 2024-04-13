@@ -1284,12 +1284,18 @@ button .btn {
   object-fit: contain;
 }
 
-.active>.page-link{
-  color: var(--color_fuente_leermas);
-  background-color: var(--color_primario_background);
+.active>.page-link ,.active>.page-link:hover{
+  font-weight: bolder;
+  border: var(--color_fuente_leermas) 1px solid;
+  color: var(--color_fuentes_principales);
+  background-color: var(--color_fuente_leermas);
 } 
 
 .page-link{
   color: var(--color_fuente_leermas);
   background-color: var(--background_cuadros);
+}
+
+.page-link:hover{
+  color: var(--color_fuente_leermas);
 }
