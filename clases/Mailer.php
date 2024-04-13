@@ -19,7 +19,7 @@ $mail = new PHPMailer(true);
 
 try {
     //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_OF;   //SMTP::DEBUG_OF;                   
+    $mail->SMTPDebug = SMTP::DEBUG_OFF;   //SMTP::DEBUG_OF;                   
     $mail->isSMTP();                                            
     $mail->Host       = MAIL_HOST;
     $mail->SMTPAuth   = true;                                   
