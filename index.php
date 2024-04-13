@@ -19,6 +19,7 @@
 <?php
 require 'config/config.php';
 require 'config/conexionbd.php';
+require 'clases/clienteFunciones.php';
 $db = new Database();
 $con = $db->conectar();
 
@@ -53,7 +54,7 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                         <img class="cuadro-imgs" src="./resources/imgs/products/36/primary.webp" alt="" />
                     </div>
 
-                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=1"> Comprar </a></button>
                 </div>
                 
             </div>
@@ -325,7 +326,9 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- footer -->
     <?php include_once "./clases/footer.php" ?>
-
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+     
     <!--==script=======================================-->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./js/scripts.js"></script>

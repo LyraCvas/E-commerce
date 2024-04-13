@@ -1,6 +1,7 @@
 <?php
 require 'config/config.php';
 require 'config/conexionbd.php';
+require 'clases/clienteFunciones.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;

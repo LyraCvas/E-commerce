@@ -1,6 +1,7 @@
 <?php
 require 'config/config.php';
 require 'config/conexionbd.php';
+require 'clases/clienteFunciones.php';
 $db = new Database();
 $con = $db->conectar();
 

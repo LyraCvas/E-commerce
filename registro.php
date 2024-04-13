@@ -7,7 +7,9 @@ require 'config/config.php';
 $db = new database();
 $con =  $db->conectar();
 
+$exito = [];
 $errors = [];
+
 
 if(!empty($_POST)){
 
@@ -27,6 +29,7 @@ if(!empty($_POST)){
     if(!esEmail ($email)) {
         $errors[] = "La dirección de correo  no es válida";
     }
+
 
     if(!validaPassword($password, $repassword)){
         $errors[] = "Las contraseñas no coinciden";
@@ -49,32 +52,36 @@ if(!empty($_POST)){
             require 'clases/Mailer.php';
             $mailer = new  Mailer();
             $token = generarToken();
-            $url = SITE_URL . 'activa_cliente.php?id=' .$id .'&token=' .$token;
-            $asunto = "Activar cuenta - Tienda online";
-            $cuerpo ="Estimado $nombres: <br> Para continuar con el proceso de registro es indispensable en la
-            sigiente liga <a href='$url'>Activar Cuenta </a>";
+     
 
             $pass_hash = password_hash($password, PASSWORD_DEFAULT);
            
-            if (registraUsuario([$usuario, $password, $token, $id], $con)){
+            $idUsuario = registraUsuario([$usuario, $pass_hash, $token, $id], $con);
+            if ($idUsuario > 0){
+
+                $url = SITE_URL . '/activa_cliente.php?id=' .$idUsuario .'&token=' .$token;
+                $asunto = "Activar cuenta - Tienda online";
+                $cuerpo ="Estimado $nombres: <br> Para continuar con el proceso de registro es indispensable en la
+                sigiente liga <a href='$url'>Activar Cuenta </a>";
 
                 if($mailer->enviarEmail($email, $asunto, $cuerpo)){
-                    echo "Para terminar el proceso de registro siga las instrucciones que le hemos enviado a la
-                    direccion de correo electronico $email";
+                    $exito[] = "Hemos enviado el correo para activar su cuenta a la siguiente direccion: " . $email;
+                    //echo "Para terminar el proceso de registro siga las instrucciones que le hemos enviado a la
+                    //direccion de correo electronico $email";
 
-                    exit;
+                    //exit;
                 } 
 
                 }else{
                       $errors[] = "Error al registrar usuario";
                 }
                 
-                } else{
+        } else{
             $errors[] = "Error al registrar cliente";
         }
 
     }
-    
+
 }
 
 
@@ -89,7 +96,7 @@ if(!empty($_POST)){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./resources/css/style.css" />
+    <link rel="stylesheet" href="./resources/css/estilos.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -100,64 +107,16 @@ if(!empty($_POST)){
 </head>
 <body>
     
-<header>
-        <div class="header__superior">
-            <div class="logo">
-                <img src="./resources/imgs/logos/Rhino Tech -1.png" alt="" />
-            </div>
+<?php include_once './clases/header.php'?>
 
-            <div class="carrito">
-                <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ">
-                    <a href="cart_list.php" type="button" class="btn btn-primary position-relative">
-                        <i class="fa-solid fa-cart-shopping"></i><span id="num_cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $num_cart; ?></span>
-                    </a>
-                </div>
-            </div>
-            <div class="banderas">
-                <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-de-las-islas-periféricas-de-ee-uu-48.png" alt="" />
-                </a>
-                <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-españa-48.png" alt="" /></a>
-            </div>
-        </div>
-
-        <div class="container__menu">
-            <div class="menu">
-                <input type="checkbox" id="check__menu" />
-                <label for="check__menu" id="label__check">
-                    <i class="fas fa-bars icon__menu"></i>
-                </label>
-                <nav class="menu_nav">
-                    <ul class="menu_list">
-                        <li class="menu_litem">
-                            <a href="./index.php" id="selected"><i class="fa-solid fa-house"></i></a>
-                        </li>
-                        <li class="menu_litem">
-                            <a href="./products.php">Tienda</a>
-                            <ul class="menu_list">
-                                <li class="menu_litem"><a href="./products.php?ctg=laptops">Laptos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=desktop">Desktop</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=impresoras">Impresoras</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=audifonos">Audifonos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=teclados">Teclados</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu_litem"><a href="#">Nosotros</a></li>
-                        <li class="menu_litem"><a href="#">Blog</a></li>
-                        <li class="menu_litem"><a href="#">Contactos</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
 
 <main>
     <div class="container">
         <h2 style="margin-top:5%; margin-bottom:3%;">Datos del cliente </h2>
+        <?php mostrarExito($exito);?>
+        <?php mostrarMensajes($errors);?>
+      
 
-        <?php mostrarMensajes($errors);
-        
-        
-        ?>
         <form class="row g-3" action="registro.php" method="post" autocomplete="off">
             
         

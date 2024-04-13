@@ -80,7 +80,24 @@
                  </ul>
              </div>
              <div class="log-sign" style="--i: 1.8s">
-                 <a href=""><i class='bx bx-user'></i></a>
+             <?php if(isset($_SESSION['user_id'])){ ?>
+                
+                
+                
+                <div class="dropdown_mar">
+                    <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="btn_session" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user"></i> <?php echo $_SESSION['user_name'];?>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="btn_session">
+                        <li><a class="dropdown-item" href="logout.php">Cerrar Sesión</a></li>
+                     
+                    </ul>
+                </div>
+            
+            <?php } else {?>
+                <a href="login.php" class="btn btn-success">
+                 <i class="fa-solid fa-user"></i> Ingresar</a>
+            <?php }?>
                  <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-de-las-islas-periféricas-de-ee-uu-48.png" alt="" /></a>
                  <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-españa-48.png" alt="" /></a>
              </div>
