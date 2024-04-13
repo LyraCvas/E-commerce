@@ -7,8 +7,8 @@ require 'config/config.php';
 $user_id = $_GET['id'] ?? $_POST['user_id'] ?? '';
 $token = $_GET['token'] ?? $_POST['token'] ?? '';
 
-if($user_id == ''  || $token == '') {
-    header('Location: index.php');
+if($user_id == ''  || $token == ''){
+    header("Location: index.php");
     exit;
 
 }
@@ -16,6 +16,7 @@ if($user_id == ''  || $token == '') {
 $db = new database();
 $con =  $db->conectar();
 
+$exito = [];
 $errors = [];
 
 if(!verificaTokenRequest($user_id, $token, $con)){
@@ -25,35 +26,28 @@ if(!verificaTokenRequest($user_id, $token, $con)){
 
 if(!empty($_POST)){
 
-    $nombres = trim($_POST['nombres']);
-    $direccion = trim($_POST['direccion']);
-    $email = trim($_POST['email']);
-    $telefono = trim($_POST['telefono']);
-    $dni = trim($_POST['dni']);
-    $usuario = trim($_POST['usuario']);
+ 
     $password = trim($_POST['password']);
     $repassword = trim($_POST['repassword']);
 
-    if(esNulo([$nombres,$direccion,$email,$telefono,$dni,$usuario,$password, $repassword])){
+    if(esNulo([$user_id, $token, $password, $repassword])){
         $errors[] = "Debe llenar todos los campos"; 
-    }
-
-    if(!esEmail ($email)) {
-        $errors[] = "La dirección de correo  no es válida";
     }
 
     if(!validaPassword($password, $repassword)){
         $errors[] = "Las contraseñas no coinciden";
     }
 
-    if(usuarioExiste($usuario, $con)){
-        $errors[] = "El nombre de usuario $usuario ya existe";
+    if(count($errors) == 0){
+        $pass_hash = password_hash($password, PASSWORD_DEFAULT);
+        if(actualizaPassword($user_id, $pass_hash, $con)){
+            $exito[] = "Su clave ha sido modificada con exito.";
+            //echo "contraseña modificada. <br><a href='login.php'>Iniciar sesión</a>";
+            //exit; 
+        } else{
+            $errors[] = "Error al modificar la contraseña. Intentalo nuevamente";
+        }
     }
-
-    if(emailExiste($email, $con)){
-        $errors[] = "El correo electronico $email ya existe";
-    }
-
 
 }
 
@@ -131,6 +125,7 @@ if(!empty($_POST)){
         <h3>Cambiar contraseña</h3>
 
         <?php mostrarMensajes($errors); ?> 
+        <?php mostrarExito($exito); ?>
 
         <form action="reset_password.php" method="post" class="row g-3" autocomplete="off">
 

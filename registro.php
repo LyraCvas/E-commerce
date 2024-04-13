@@ -7,7 +7,9 @@ require 'config/config.php';
 $db = new database();
 $con =  $db->conectar();
 
+$exito = [];
 $errors = [];
+
 
 if(!empty($_POST)){
 
@@ -27,6 +29,7 @@ if(!empty($_POST)){
     if(!esEmail ($email)) {
         $errors[] = "La dirección de correo  no es válida";
     }
+
 
     if(!validaPassword($password, $repassword)){
         $errors[] = "Las contraseñas no coinciden";
@@ -62,10 +65,11 @@ if(!empty($_POST)){
                 sigiente liga <a href='$url'>Activar Cuenta </a>";
 
                 if($mailer->enviarEmail($email, $asunto, $cuerpo)){
-                    echo "Para terminar el proceso de registro siga las instrucciones que le hemos enviado a la
-                    direccion de correo electronico $email";
+                    $exito[] = "Hemos enviado el correo para activar su cuenta a la siguiente direccion: " . $email;
+                    //echo "Para terminar el proceso de registro siga las instrucciones que le hemos enviado a la
+                    //direccion de correo electronico $email";
 
-                    exit;
+                    //exit;
                 } 
 
                 }else{
@@ -156,11 +160,10 @@ if(!empty($_POST)){
 <main>
     <div class="container">
         <h2 style="margin-top:5%; margin-bottom:3%;">Datos del cliente </h2>
+        <?php mostrarExito($exito);?>
+        <?php mostrarMensajes($errors);?>
+      
 
-        <?php mostrarMensajes($errors);
-        
-        
-        ?>
         <form class="row g-3" action="registro.php" method="post" autocomplete="off">
             
         

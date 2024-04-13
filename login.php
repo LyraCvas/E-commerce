@@ -7,6 +7,7 @@ require 'config/config.php';
 $db = new database();
 $con =  $db->conectar();
 
+$exito = [];
 $errors = [];
 
 if(!empty($_POST)){
@@ -109,6 +110,8 @@ if(!empty($_POST)){
         <h2>Inicia sesión</h2>
 
    <?php mostrarMensajes($errors); ?>  <!-- Mostramos los mensajes de error -->
+   <?php mostrarExito($exito);?>
+
 
    <form class="row g-3" action="login.php" method= "post" autocomplete="off">
 

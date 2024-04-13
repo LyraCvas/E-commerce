@@ -14,6 +14,7 @@ function esNulo(array $parametros)
 
 }
 
+
 function esEmail($email){
     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
         return true;
@@ -84,6 +85,21 @@ function emailExiste($email, $con)
 
     return false;
 
+}
+
+function mostrarExito(array $exito) {
+    if (count($exito) > 0) {
+        echo '<div class="alert alert-warning alert-dismissible fade show" role="alert"><ul>';
+        foreach($exito as $exito) {
+            echo '<li>' . $exito . '</li>';
+        }
+
+        echo '</ul>';
+        echo '  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>';
+      
+
+    }
 }
 
 
@@ -174,8 +190,7 @@ function solicitaPassword($user_id, $con){
 }
 
 function verificaTokenRequest($user_id, $token, $con){
-    $sql = $con->prepare("SELECT id FROM usuarios WHERE id = ? AND token_password LIKE ?  
-    AND password_request=1 LIMIT 1");
+    $sql = $con->prepare("SELECT id FROM usuarios WHERE id = ? AND token_password LIKE ? AND password_request=1 LIMIT 1");
 
     $sql->execute([$user_id, $token]);
     if($sql->fetchColumn() > 0){
@@ -185,6 +200,15 @@ return false;
 
 }
 
+function actualizaPassword($user_id, $password, $con){
+    $sql =  $con->prepare("UPDATE usuarios SET password=?, token_password='', password_request = 0 
+    WHERE id=?");
+
+    if( $sql-> execute([$password, $user_id])){
+        return true;
+    }
+    return false;
+}
 
 
 ?>

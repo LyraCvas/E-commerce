@@ -7,7 +7,9 @@ require 'config/config.php';
 $db = new database();
 $con =  $db->conectar();
 
+$exito = [];
 $errors = [];
+
 
 if(!empty($_POST)){
 
@@ -47,10 +49,12 @@ if(!empty($_POST)){
                 $cuerpo.= "<br>Si no has realializaste esta solicitud puedes ignorar este correo";
 
                 if($mailer->enviarEmail($email, $asunto, $cuerpo)){
-                    echo "<p><b>Correo Enviado</b></p>";
-                    echo "<p>Hemos enviado un correo electronico a la dirección $email para restablecer la contraseña</p>";
+                    $exito[] = "Hemos enviado un correo electronico a la dirección $email para restablecer la contraseña";
+                    
+                    //echo "<p><b>Correo Enviado</b></p>";
+                    //echo "<p>Hemos enviado un correo electronico a la dirección $email para restablecer la contraseña</p>";
 
-                    exit;
+                   // exit;
                 } 
 
             }
@@ -136,7 +140,8 @@ if(!empty($_POST)){
 
 <main class="form-login m-auto pt-4" style="max-width: 350px;" >
     <h3>Recuperar contraseña</h3>
-
+    
+    <?php mostrarExito($exito);?>
     <?php mostrarMensajes($errors); ?> 
 
     <form action="recupera.php" method="post" class="row g-3" autocomplete="off">
