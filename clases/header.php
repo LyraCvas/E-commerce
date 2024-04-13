@@ -3,7 +3,7 @@
      <nav class="navigation">
          <input type="checkbox" name="" id="check">
          <div class="logo-container">
-             <img class="logo" src="./resources/imgs/logos/Rhino Tech -1.png" alt="">
+             <a href="./index.php"><img class="logo" src="./resources/imgs/logos/Rhino Tech -1.png" alt=""></a>
          </div>
          <div class="nav-btn">
              <div class="nav-links">
@@ -11,7 +11,7 @@
                      <li class="nav-link" style="--i: .6s">
                          <a href="./index.php">Inicio</a>
                      </li>
-                     <li class="nav-link" style="--i: .85s">
+                     <li class="nav-link" style="--i: .6s">
                          <a href="./products.php">Productos<i class="fas fa-caret-down"></i></a>
                          <div class="dropdown_vic">
                              <ul>
@@ -62,15 +62,15 @@
                          </div>
                      </li>
                      <li class="nav-link" style="--i: .6s">
-                         <a href="#">Nosotros</a>
+                         <a href="./nosotros.php">Nosotros</a>
                      </li>
                      <li class="nav-link" style="--i: .6s">
-                         <a href="./contacto.html">Contactos</a>
+                         <a href="./contacto.php">Contactos</a>
                      </li>
 
                      </li>
-                     <li class="nav-link" style="--i: .6s">
-                         <a href="./dashboard.html"><i class='bx bxs-dashboard'></i></a>
+                     <li class="nav-link dashboard" style="--i: .6s">
+                         <a href="./dashboard.php"><i class='bx bxs-dashboard'></i></a>
                      </li>
                      <li class="nav-link carrito" style="--i: .6s">
                          <a href="cart_list.php" type="button" class=" position-relative">

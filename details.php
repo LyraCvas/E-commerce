@@ -73,26 +73,27 @@ if ($id == '' || $token == '') {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Bootstrap CSS v5.3.3 -->
     <link rel="stylesheet" href="./resources/css/estilos.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
 </head>
 
 <body>
     <!-- Header -->
-    <?php include_once './clases/header.php'?>
+    <?php include_once './clases/header.php' ?>
     <main>
-        <div class="container">
+        <div class="container pt-5">
             <div class="row">
                 <div class="col-md-6 order-md-1">
                     <div id="carouselImages" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="<?php echo $rutaImg; ?>" class="d-block w-100">
+                                <img src="<?php echo $rutaImg; ?>" class="d-block w-100 img-details">
                             </div>
                             <?php foreach ($imagenes as $img) { ?>
                                 <div class="carousel-item">
-                                    <img src="<?php echo $img; ?>" class="d-block w-100">
+                                    <img src="<?php echo $img; ?>" class="d-block w-100 img-details">
                                 </div>
                             <?php } ?>
                         </div>
@@ -122,21 +123,39 @@ if ($id == '' || $token == '') {
                     <p class="lead">
                         <?php echo $descrp ?>
                     </p>
-                    <div class="d-grip gap-2 col-10 mx-auto">
-                        <button class="btn btn-primary" type="button">Comprar</button>
-                        <button class="btn btn-outline-primary" type="button" onclick="addProduct(<?php echo $id; ?>,'<?php echo $token_tmp; ?>')">Agregar al carrito</button>
+                    <div class="d-flex gap-3 col-12 ">
+                        <button class="btn2 btn_a" type="button">Comprar</button>
+                        <button id="ToastBtn<?php echo $id; ?>" class="btn1 btn_a" type="button" onclick="addProduct(<?php echo $id; ?>,'<?php echo $token_tmp; ?>')">Agregar al carrito</button>
                     </div>
                 </div>
 
             </div>
         </div>
     </main>
+    <!-- Toast -->
+    <div aria-live="polite" aria-atomic="true" class="position-relative top-0 start-0 p-3" style="z-index: 111111111111111111111;">
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            <!-- Then put toasts within -->
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" id="toastAddCart">
+                <div class="toast-header">
+                    <strong class="me-auto">Notificacion</strong>
+                    <small class="text-body-secondary">Ahora</small>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    Se ha añadido producto al carrito!
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <?php include_once "./clases/footer.php" ?>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
+    <!-- script de agregar productos -->
     <script>
         function addProduct(id, token) {
             let url = 'clases/cart.php'
@@ -158,7 +177,37 @@ if ($id == '' || $token == '') {
         }
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- script del toast -->
+    <script>
+        const toastBTN = document.querySelectorAll('[id^="ToastBtn"]');
+        const toast = document.getElementById('toastAddCart')
+        const toastArray = Array.from(toastBTN);
+
+        toastArray.forEach((toastShow) => {
+            const toastBootstrap = new bootstrap.Toast(toast);
+            toastShow.addEventListener('click', () => {
+                toastBootstrap.show();
+            });
+        });
+
+
+
+
+
+        // const toastBTN = document.querySelectorAll('[id^="ToastBtn"]')
+        // const toastBTNArray = Array.from(toastBTN)
+        // 
+
+
+        // toastBTNArray.forEach((btn) => {
+        //     const toastBootstrap = new bootstrap.Toast(btn)
+        //     btn.addEventListener('click', () => {
+        //         toastBootstrap.show()
+        //     })
+
+        // })
+    </script>
+
 </body>
 
 </html>
