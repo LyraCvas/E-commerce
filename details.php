@@ -86,7 +86,7 @@ if ($id == '' || $token == '') {
         <div class="container pt-5">
             <div class="row">
                 <div class="col-md-6 order-md-1">
-                    <div id="carouselImages" class="carousel slide">
+                    <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="<?php echo $rutaImg; ?>" class="d-block w-100 img-details">
@@ -124,7 +124,7 @@ if ($id == '' || $token == '') {
                         <?php echo $descrp ?>
                     </p>
                     <div class="d-flex gap-3 col-12 ">
-                        <button class="btn2 btn_a" type="button">Comprar</button>
+                        <button class="btn2 btn_a" type="button" onclick="addProduct(<?php echo $id; ?>,'<?php echo $token_tmp; ?>')"><a href="./cart_list.php" class="btn_aa">Comprar</a></button>
                         <button id="ToastBtn<?php echo $id; ?>" class="btn1 btn_a" type="button" onclick="addProduct(<?php echo $id; ?>,'<?php echo $token_tmp; ?>')">Agregar al carrito</button>
                     </div>
                 </div>

@@ -131,7 +131,7 @@
                                 <img class="img_product" src="<?php echo $img ?>" alt="">
                             </div>
                             <div class="card-body">
-                                <p class="card-text" style="gap: 5px;"><?php echo $row['product_brand'] ?> <?php echo $row['product_name'] ?></p>                                                            
+                                <p class="card-text " style="gap: 5px;"><?php echo $row['product_brand'] ?> <?php echo $row['product_name'] ?></p>                                                            
                                 <?php if ($row['discount'] > 0) { ?>
                                     <div class="d-flex justify-content-start align-items-center gap-1">
                                         <h5>
@@ -144,8 +144,8 @@
                                 <?php } else { ?>
                                     <h5><?php echo MONEDA . number_format($row['price'], 2, '.', ','); ?></h5>
                                 <?php } ?>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group w-100 d-flex justify-content-between">
+                                <div class="d-flex justify-content-center align-items-center">
+                                    <div class="btn-group w-100 d-flex justify-content-between gap-3 row row-cols-sm-1">
                                         <a href="details.php?id=<?php echo $row['id_products']; ?>&token=<?php echo hash_hmac('sha1', $row['id_products'], KEY_TOKEN); ?>" class="btn2 btn_a stretched-link">Detalles</a>
                                         <button id="ToastBtn<?php echo $row['id_products']; ?>" class=" btn1 btn_a" type="button" onclick="addProduct(<?php echo $row['id_products']; ?>,'<?php echo hash_hmac('sha1', $row['id_products'], KEY_TOKEN); ?>')">
                                             Agregar al carrito</button>

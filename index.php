@@ -46,15 +46,16 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                     <div>
                         <img class="cuadro-imgs" src="./resources/imgs/laptos/lapto-_2_.webp" alt="" />
                     </div>
-                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=4"> Comprar </a></button>
                 </div>
-
                 <div class="cards-cont-2">
                     <div>
-                        <img class="cuadro-imgs" src="./resources/imgs/impresoras/impresora.webp" alt="" />
+                        <img class="cuadro-imgs" src="./resources/imgs/products/36/primary.webp" alt="" />
                     </div>
+
                     <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
                 </div>
+                
             </div>
             <div class="cuadro-2">
                 <div class="cards-cont-2">
@@ -62,23 +63,22 @@ $resultado = $sql->fetchAll(PDO::FETCH_ASSOC);
                         <img class="cuadro-imgs" src="./resources/imgs/monitores/monitor-4.webp" alt="" />
                     </div>
 
-                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=6"> Comprar </a></button>
                 </div>
                 <div class="cards-cont-2">
                     <div>
-                        <img class="cuadro-imgs" src="./resources/imgs/relojes/reloj22.webp" alt="" />
+                        <img class="cuadro-imgs" src="./resources/imgs/products/20/primary.webp" alt="" />
                     </div>
 
-                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=5"> Comprar </a></button>
                 </div>
-
                 <div class="cards-cont-2">
                     <div>
-                        <img class="cuadro-imgs" src="./resources/imgs/camaras/camara-1.webp" alt="" />
+                        <img class="cuadro-imgs" src="./resources/imgs/impresoras/impresora.webp" alt="" />
                     </div>
-
-                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=8"> Comprar </a></button>
+                    <button class="btn1"><a class="btn_a" href="./products.php?ctg=7"> Comprar </a></button>
                 </div>
+                
             </div>
         </div>
     </div>

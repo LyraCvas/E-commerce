@@ -49,18 +49,18 @@
 
     <main>
         <div class="container">
-            <div class="row">
+            <div class="row  row-cols-sm-1 row-cols-md-2 cols-1">
                 <div class="col-6">
                     <h2>Metodos de pago</h4>
                         <!-- BOTONES PAYPAL -->
                         <div id="paypal-button-container"></div>
 
                         <!-- Display a payment form STRIPE -->
-                        <h2>Stripe</h4>
+                        <!-- <h2>Stripe</h4>
                         <form id="payment-form" method="post" action="/clases/capture_stripe.php">
                             
                             <div id="payment-element">
-                                <!--Stripe.js injects the Payment Element-->
+                                
                             </div>
                             
                             <button id="submit">
@@ -68,7 +68,7 @@
                                 <span id="button-text">Pay now</span>
                             </button>
                             <div id="payment-message" class="hidden"></div>
-                        </form>
+                        </form> -->
                 </div>
                 <div class="col-6">
                     <div class="table-responsive">
