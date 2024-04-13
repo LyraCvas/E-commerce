@@ -20,6 +20,7 @@ $exito = [];
 $errors = [];
 
 if(!verificaTokenRequest($user_id, $token, $con)){
+    
     echo "No se pudo verificar la informacion";
     exit;
 }
