@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="resources/css/estilos.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Rhinotech</title>
@@ -15,6 +16,7 @@
     <?php
     require 'config/config.php';
     require 'config/conexionbd.php';
+    require 'clases/clienteFunciones.php';
     $db = new Database();
     $con = $db->conectar();
 
@@ -37,55 +39,7 @@
 
 
     <!-- Header-->
-    <header>
-        <div class="header__superior">
-            <div class="logo">
-                <img src="./resources/imgs/logos/Rhino Tech -1.png" alt="" />
-            </div>
-
-            <div class="carrito">
-                <div class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ">
-                    <a href="cart_list.php" type="button" class="btn btn-primary position-relative">
-                        <i class="fa-solid fa-cart-shopping"></i><span id="num_cart" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo $num_cart; ?></span>
-                    </a>
-                </div>
-            </div>
-            <div class="banderas">
-                <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-de-las-islas-periféricas-de-ee-uu-48.png" alt="" />
-                </a>
-                <a href=""><img src="./resources/imgs/Banderas/icons8-emoji-españa-48.png" alt="" /></a>
-            </div>
-        </div>
-
-        <div class="container__menu">
-            <div class="menu">
-                <input type="checkbox" id="check__menu" />
-                <label for="check__menu" id="label__check">
-                    <i class="fas fa-bars icon__menu"></i>
-                </label>
-                <nav class="menu_nav">
-                    <ul class="menu_list">
-                        <li class="menu_litem">
-                            <a href="./index.php" id="selected"><i class="fa-solid fa-house"></i></a>
-                        </li>
-                        <li class="menu_litem">
-                            <a href="./products.php">Tienda</a>
-                            <ul class="menu_list">
-                                <li class="menu_litem"><a href="./products.php?ctg=laptops">Laptos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=desktop">Desktop</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=impresoras">Impresoras</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=audifonos">Audifonos</a></li>
-                                <li class="menu_litem"><a href="./products.php?ctg=teclados">Teclados</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu_litem"><a href="#">Nosotros</a></li>
-                        <li class="menu_litem"><a href="#">Blog</a></li>
-                        <li class="menu_litem"><a href="#">Contactos</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
+    <?php include_once './clases/header.php'?>
 
     <main>
         <div class="container">
@@ -103,7 +57,8 @@
                     </thead>
                     <tbody>
                         <?php if ($cart_list == null) {
-                            echo '<tr><td colspan="6" class="text-center"><b>Lista vacia</b></td></tr>';
+                            echo '<tr><td colspan="6" class="text-center"><b>Carrito Vacio, añade algun producto primero</b></td></tr>';
+                            echo '<tr><td colspan="6" class="text-center"><a class="btn1 btn_a" type="button" href="products.php">Ir a productos</a></td></tr>';
                         } else {
                             $total = 0;
                             foreach ($cart_list as $product) {
@@ -138,7 +93,7 @@
                                     <td>
                                         <div id="subtotal_<?php echo $_id; ?>" name="subtotal[]"><?php echo MONEDA . number_format($sub_total, 2, '.', ','); ?></div>
                                     </td>
-                                    <td> <a href="#" id="delete" class="btn btn-warning btn-sm" data-bs-id="<?php echo $_id; ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">Eliminar</a></td>
+                                    <td> <a href="#" id="delete" class="btn btn-warning btn-sm" data-bs-id="<?php echo $_id; ?>" data-bs-toggle="modal" data-bs-target="#deleteModal"><i class="fa-solid fa-trash"></i></a></td>
                                 </tr>
                             <?php } ?>
 
@@ -154,7 +109,7 @@
             </div>
             <?php if ($cart_list != null) { ?>
                 <div class="row">
-                    <div class="col-md-12 d-flex justify-content-end gap-2">
+                    <div class="col-md-12 d-flex justify-content-end gap-2 p-3">
                         <a href="payment.php" class="btn btn-primary btn-lg">Pagar</a>
                     </div>
                 </div>
