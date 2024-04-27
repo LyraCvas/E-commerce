@@ -5,26 +5,29 @@ $db = new Database();
 $con = $db->conectar();
 
 $json = file_get_contents('php://input');
-
 $data = json_decode($json,true);
-
 //   echo '<pre>';
 //   print_r($data);
 //   echo '</pre>';
 
 if(is_array($data)){
+    $id_client = $_SESSION['user_cliente'];
+    $sqlClient = $con->prepare("SELECT email FROM clientes WHERE id=? AND estatus=1 ");
+    $sqlClient->execute([$id_client]);
+    $row_client = $sqlClient->fetch(PDO::FETCH_ASSOC);
 
     $id_transaccion = $data['details']['id'];
     $total = $data['details']['purchase_units'][0]['amount']['value'];
     $status = $data['details']['status'];
     $date = $data['details']['update_time'];
     $date_new = date('Y-m-d H:i:s', strtotime($date));
-    $email = $data['details']['payer']['email_address'];
-    $id_client = $data['details']['payer']['payer_id'];
+    // $email = $data['details']['payer']['email_address'];
+    $email = $row_client['email'];
+    // $id_client = $data['details']['payer']['payer_id'];
 
 
-    $sql = $con->prepare("INSERT INTO orders (id_transaccion, date_order, estatus, email, client_id, total_payment) VALUES (?,?,?,?,?,?)");
-    $sql->execute([$id_transaccion, $date_new, $status, $email, $id_client, $total]);
+    $sql = $con->prepare("INSERT INTO orders (id_transaccion, date_order, estatus, email, client_id, total_payment, payment_src) VALUES (?,?,?,?,?,?,?)");
+    $sql->execute([$id_transaccion, $date_new, $status, $email, $id_client, $total, 'PAYPAL']);
     $id = $con->lastInsertId();
 
     if ($id > 0){
@@ -47,9 +50,18 @@ if(is_array($data)){
 
             }
             // enviar correo
-            include 'send_email.php';
+            // include 'send_email.php';
+            require 'Mailer.php';
+            $asunto = 'Detalles de su compra';
+            $cuerpo = '<h4> Gracias por su compra</h4>';
+            $cuerpo .='<p> El id de su compra es <b>'.$id_transaccion.'</b></p>';
+
+            $mailer = new Mailer();
+            $mailer->enviarEmail($email, $asunto, $cuerpo);
+            
+            unset($_SESSION['cart']);
         }
-        unset($_SESSION['cart']);
+        
     }
     
 }

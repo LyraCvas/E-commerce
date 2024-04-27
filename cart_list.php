@@ -110,7 +110,11 @@
             <?php if ($cart_list != null) { ?>
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-end gap-2 p-3">
+                        <?php if (isset($_SESSION['user_cliente'])) { ?>
                         <a href="payment.php" class="btn btn-primary btn-lg">Pagar</a>
+                        <?php } else { ?>
+                        <a href="login.php?pago" class="btn btn-primary btn-lg">Pagar</a>
+                        <?php } ?>
                     </div>
                 </div>
             <?php } ?>
