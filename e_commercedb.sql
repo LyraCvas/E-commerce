@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-04-2024 a las 14:51:18
+-- Tiempo de generación: 27-04-2024 a las 02:25:43
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -91,30 +91,9 @@ CREATE TABLE `orders` (
   `estatus` varchar(20) NOT NULL,
   `email` varchar(50) NOT NULL,
   `client_id` varchar(20) NOT NULL,
-  `total_payment` decimal(10,2) NOT NULL
+  `total_payment` decimal(10,2) NOT NULL,
+  `payment_src` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `orders`
---
-
-INSERT INTO `orders` (`id`, `id_transaccion`, `date_order`, `estatus`, `email`, `client_id`, `total_payment`) VALUES
-(3, '2XC822660D897384X', '2024-04-05 04:32:56', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 139.00),
-(4, '56980408NS655661L', '2024-04-06 05:47:35', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 99.99),
-(5, '4X6618386F628223H', '2024-04-06 18:21:23', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 123.49),
-(6, '3X0530952P905720F', '2024-04-06 18:26:29', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 135.98),
-(7, '3NE1938059118461W', '2024-04-06 18:28:34', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 135.98),
-(8, '10800982703261924', '2024-04-06 18:28:59', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 135.98),
-(9, '47R366121B849305D', '2024-04-06 18:49:48', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 135.98),
-(10, '0R050272NN298011M', '2024-04-06 18:51:34', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 135.98),
-(11, '0SA71864FJ1505002', '2024-04-06 18:59:52', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 135.98),
-(12, '6BT6317395116901Y', '2024-04-06 19:06:11', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 253.48),
-(13, '3XK52413VU7912623', '2024-04-06 19:08:34', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 485.14),
-(14, '4SD69570XR004203P', '2024-04-06 19:10:59', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 102.49),
-(15, '3WK49651BM874483L', '2024-04-06 19:25:01', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 979.99),
-(16, '2PD90247TA655134U', '2024-04-06 21:14:48', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 225.98),
-(17, '64585730FK891912K', '2024-04-06 21:22:02', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 1109.98),
-(18, '2TY33698ML8595006', '2024-04-09 22:54:45', 'COMPLETED', 'sb-nhhlf30252923@personal.example.com', '9W7N7BQHZHPWJ', 129.99);
 
 -- --------------------------------------------------------
 
@@ -130,42 +109,6 @@ CREATE TABLE `orders_products` (
   `price` decimal(10,2) NOT NULL,
   `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `orders_products`
---
-
-INSERT INTO `orders_products` (`id`, `order_id`, `product_id`, `product_name`, `price`, `quantity`) VALUES
-(1, 3, 1, 'MX MECHANICAL MINI FOR MAC', 123.49, 1),
-(2, 3, 5, 'Sata 3.0 (6 Gb/s) High Speed Data Cable', 2.50, 6),
-(3, 4, 2, 'MX MASTER 3S FOR MAC', 99.99, 1),
-(4, 5, 1, 'MX MECHANICAL MINI FOR MAC', 123.49, 1),
-(5, 6, 2, 'MX MASTER 3S FOR MAC', 99.99, 1),
-(6, 6, 14, 'UPS MINI KP2-EC', 35.99, 1),
-(7, 7, 2, 'MX MASTER 3S FOR MAC', 99.99, 1),
-(8, 7, 14, 'UPS MINI KP2-EC', 35.99, 1),
-(9, 8, 2, 'MX MASTER 3S FOR MAC', 99.99, 1),
-(10, 8, 14, 'UPS MINI KP2-EC', 35.99, 1),
-(11, 9, 2, 'MX MASTER 3S FOR MAC', 99.99, 1),
-(12, 9, 14, 'UPS MINI KP2-EC', 35.99, 1),
-(13, 10, 2, 'MX MASTER 3S FOR MAC', 99.99, 1),
-(14, 10, 14, 'UPS MINI KP2-EC', 35.99, 1),
-(15, 11, 2, 'MX MASTER 3S FOR MAC', 99.99, 1),
-(16, 11, 14, 'UPS MINI KP2-EC', 35.99, 1),
-(17, 12, 1, 'MX MECHANICAL MINI FOR MAC', 123.49, 1),
-(18, 12, 3, 'ZONE VIBE 125', 129.99, 1),
-(19, 13, 6, 'Cable Displayport Macho A Macho 1.5mts', 9.99, 1),
-(20, 13, 8, 'TPN-Q222', 435.16, 1),
-(21, 13, 12, 'UPS MINI KP2', 39.99, 1),
-(22, 14, 2, 'MX MASTER 3S FOR MAC', 99.99, 1),
-(23, 14, 5, 'Sata 3.0 (6 Gb/s) High Speed Data Cable', 2.50, 1),
-(24, 15, 4, 'ROG Zephyrus G14 (2022) GA402', 979.99, 1),
-(25, 16, 1, 'MX MECHANICAL MINI FOR MAC', 123.49, 1),
-(26, 16, 2, 'MX MASTER 3S FOR MAC', 99.99, 1),
-(27, 16, 5, 'Sata 3.0 (6 Gb/s) High Speed Data Cable', 2.50, 1),
-(28, 17, 4, 'ROG Zephyrus G14 (2022) GA402', 979.99, 1),
-(29, 17, 3, 'ZONE VIBE 125', 129.99, 1),
-(30, 18, 3, 'ZONE VIBE 125', 129.99, 1);
 
 -- --------------------------------------------------------
 
@@ -335,13 +278,13 @@ ALTER TABLE `opt`
 -- AUTO_INCREMENT de la tabla `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `orders_products`
 --
 ALTER TABLE `orders_products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `products`
